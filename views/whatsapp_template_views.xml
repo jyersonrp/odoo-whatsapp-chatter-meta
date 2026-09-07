@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- List View -->
+    <record id="view_whatsapp_template_tree" model="ir.ui.view">
+        <field name="name">whatsapp.template.list</field>
+        <field name="model">whatsapp.template</field>
+        <field name="arch" type="xml">
+            <list string="Plantillas de WhatsApp (HSM)">
+                <field name="name"/>
+                <field name="account_id"/>
+                <field name="model_id"/>
+                <field name="language"/>
+                <field name="header_type"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_whatsapp_template_form" model="ir.ui.view">
+        <field name="name">whatsapp.template.form</field>
+        <field name="model">whatsapp.template</field>
+        <field name="arch" type="xml">
+            <form string="Plantilla Oficial de Meta (HSM)">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Nombre de la Plantilla en Meta"/>
+                        <h1>
+                            <field name="name" placeholder="ej. envio_cotizacion_v1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Configuración Principal">
+                            <field name="account_id" options="{'no_create': True}"/>
+                            <field name="model_id" options="{'no_create': True}"/>
+                            <field name="language"/>
+                            <field name="header_type"/>
+                            <field name="active"/>
+                        </group>
+                        <group string="Mapeo Dinámico">
+                            <field name="variable_mapping" placeholder="partner_id.name, name, amount_total"/>
+                            <div class="text-muted" colspan="2">
+                                Ingrese los campos separados por comas que reemplazarán las variables {{1}}, {{2}}, {{3}} en orden secuencial.
+                            </div>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Cuerpo del Mensaje">
+                            <field name="body" 
+                                   placeholder="Hola {{1}}, le enviamos su documento {{2}} por un monto total de {{3}}..." 
+                                   widget="text" 
+                                   style="width: 100%; min-height: 150px;"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_whatsapp_template" model="ir.actions.act_window">
+        <field name="name">Plantillas Oficiales HSM</field>
+        <field name="res_model">whatsapp.template</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Registre las plantillas HSM aprobadas en Meta para iniciar conversaciones fuera de la ventana de 24 horas.
+            </p>
+        </field>
+    </record>
+</odoo>

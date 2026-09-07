@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Search View -->
+    <record id="view_whatsapp_message_search" model="ir.ui.view">
+        <field name="name">whatsapp.message.search</field>
+        <field name="model">whatsapp.message</field>
+        <field name="arch" type="xml">
+            <search string="Buscar Mensajes de WhatsApp">
+                <field name="name"/>
+                <field name="wamid"/>
+                <field name="sender"/>
+                <field name="recipient"/>
+                <field name="partner_id"/>
+                <field name="res_model"/>
+                <filter string="Entrantes" name="filter_inbound" domain="[('direction', '=', 'inbound')]"/>
+                <filter string="Salientes" name="filter_outbound" domain="[('direction', '=', 'outbound')]"/>
+                <separator/>
+                <filter string="Fallidos" name="filter_failed" domain="[('status', '=', 'failed')]"/>
+                <filter string="Entregados/Leídos" name="filter_delivered" domain="[('status', 'in', ('delivered', 'read'))]"/>
+                <group>
+                    <filter string="Dirección" name="group_direction" context="{'group_by': 'direction'}"/>
+                    <filter string="Estado" name="group_status" context="{'group_by': 'status'}"/>
+                    <filter string="Contacto" name="group_partner" context="{'group_by': 'partner_id'}"/>
+                    <filter string="Fecha" name="group_date" context="{'group_by': 'date:day'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- List View -->
+    <record id="view_whatsapp_message_tree" model="ir.ui.view">
+        <field name="name">whatsapp.message.list</field>
+        <field name="model">whatsapp.message</field>
+        <field name="arch" type="xml">
+            <list string="Bitácora de Mensajes de WhatsApp" create="false" edit="false">
+                <field name="date"/>
+                <field name="name"/>
+                <field name="wamid" optional="hide"/>
+                <field name="direction" 
+                       widget="badge" 
+                       decoration-info="direction == 'outbound'" 
+                       decoration-success="direction == 'inbound'"/>
+                <field name="sender"/>
+                <field name="recipient"/>
+                <field name="partner_id"/>
+                <field name="res_model" optional="show"/>
+                <field name="res_id" optional="show"/>
+                <field name="status" 
+                       widget="badge"
+                       decoration-danger="status == 'failed'"
+                       decoration-success="status in ('delivered', 'read')"
+                       decoration-info="status == 'sent'"
+                       decoration-primary="status == 'received'"/>
+                <field name="error_code" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_whatsapp_message_form" model="ir.ui.view">
+        <field name="name">whatsapp.message.form</field>
+        <field name="model">whatsapp.message</field>
+        <field name="arch" type="xml">
+            <form string="Auditoría de Mensaje de WhatsApp" create="false" edit="false">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Detalles de Entrega">
+                            <field name="wamid"/>
+                            <field name="date"/>
+                            <field name="direction"/>
+                            <field name="status" 
+                                   widget="badge"
+                                   decoration-danger="status == 'failed'"
+                                   decoration-success="status in ('delivered', 'read')"
+                                   decoration-info="status == 'sent'"
+                                   decoration-primary="status == 'received'"/>
+                            <field name="error_code" invisible="status != 'failed'"/>
+                            <field name="error_message" invisible="status != 'failed'"/>
+                        </group>
+                        <group string="Interlocutores y Documento">
+                            <field name="account_id"/>
+                            <field name="sender"/>
+                            <field name="recipient"/>
+                            <field name="partner_id"/>
+                            <field name="res_model"/>
+                            <field name="res_id"/>
+                            <field name="attachment_id" invisible="not attachment_id"/>
+                            <field name="media_id" invisible="not media_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Contenido del Mensaje">
+                            <field name="body" readonly="1" widget="text"/>
+                        </page>
+                        <page string="Payload JSON Crudo" groups="base.group_no_one">
+                            <field name="raw_payload" readonly="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_whatsapp_message" model="ir.actions.act_window">
+        <field name="name">Bitácora de Mensajes</field>
+        <field name="res_model">whatsapp.message</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_whatsapp_message_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Historial y bitácora de mensajes de WhatsApp transaccionales despachados y recibidos.
+            </p>
+        </field>
+    </record>
+</odoo>

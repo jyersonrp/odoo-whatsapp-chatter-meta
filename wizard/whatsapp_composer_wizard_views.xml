@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_whatsapp_composer_wizard_form" model="ir.ui.view">
+        <field name="name">whatsapp.composer.wizard.form</field>
+        <field name="model">whatsapp.composer.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Enviar Mensaje por WhatsApp">
+                <field name="res_model" invisible="1"/>
+                <field name="res_id" invisible="1"/>
+                <field name="is_window_open" invisible="1"/>
+
+                <div class="alert alert-info d-flex align-items-center mb-3" role="alert" invisible="not is_window_open">
+                    <i class="fa fa-info-circle fa-2x me-2" title="Información"/>
+                    <div>
+                        <strong>Ventana de 24 Horas Activa:</strong> El cliente ha interactuado recientemente. Puede redactar un mensaje libre o seleccionar una plantilla HSM.
+                    </div>
+                </div>
+
+                <div class="alert alert-warning d-flex align-items-center mb-3" role="alert" invisible="is_window_open">
+                    <i class="fa fa-exclamation-triangle fa-2x me-2" title="Advertencia"/>
+                    <div>
+                        <strong>Ventana de 24 Horas Inactiva:</strong> Meta requiere el envío obligatorio de una Plantilla Oficial HSM aprobada para iniciar la conversación.
+                    </div>
+                </div>
+
+                <group>
+                    <group>
+                        <field name="account_id" options="{'no_create': True}"/>
+                        <field name="partner_id" options="{'no_create': True}"/>
+                        <field name="phone" placeholder="+5215512345678"/>
+                    </group>
+                    <group>
+                        <field name="message_mode" widget="radio" readonly="not is_window_open"/>
+                        <field name="template_id" 
+                               invisible="message_mode != 'template'" 
+                               required="message_mode == 'template'"
+                               options="{'no_create': True}"/>
+                    </group>
+                </group>
+
+                <notebook>
+                    <page string="Contenido del Mensaje">
+                        <field name="body" 
+                               placeholder="Redacte su mensaje o seleccione una plantilla para cargar el contenido dinámico..." 
+                               widget="text" 
+                               style="width: 100%; min-height: 120px;"/>
+                    </page>
+                    <page string="Adjunto PDF Oficial">
+                        <group>
+                            <field name="attach_pdf"/>
+                            <field name="pdf_filename" invisible="not attach_pdf"/>
+                            <field name="report_action_id" invisible="not attach_pdf" options="{'no_create': True}"/>
+                        </group>
+                    </page>
+                </notebook>
+
+                <footer>
+                    <button string="Enviar por WhatsApp" name="action_send_whatsapp" type="object" class="btn-primary" icon="fa-whatsapp"/>
+                    <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

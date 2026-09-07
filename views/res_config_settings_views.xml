@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_inherit_whatsapp" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.whatsapp</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="50"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app string="WhatsApp Meta" name="whatsapp_chatter_meta">
+                    <block title="Integración WhatsApp Cloud API" id="whatsapp_settings_container">
+                        <setting id="whatsapp_account_setting" string="Cuenta Activa" help="Seleccione o configure la cuenta de Meta WhatsApp Cloud API para esta compañía">
+                            <field name="whatsapp_account_id"/>
+                            <div class="mt8" invisible="not whatsapp_account_id">
+                                <button name="%(action_whatsapp_account)d" icon="oi-arrow-right" type="action" string="Administrar Cuentas" class="btn-link"/>
+                            </div>
+                        </setting>
+                        <setting id="whatsapp_credentials_setting" string="Credenciales de Meta" help="Parámetros de conexión con la Graph API" invisible="not whatsapp_account_id">
+                            <div class="content-group">
+                                <div class="row mt16">
+                                    <label for="whatsapp_phone_number_id" class="col-lg-3 o_light_label"/>
+                                    <field name="whatsapp_phone_number_id"/>
+                                </div>
+                                <div class="row mt8">
+                                    <label for="whatsapp_waba_id" class="col-lg-3 o_light_label"/>
+                                    <field name="whatsapp_waba_id"/>
+                                </div>
+                                <div class="row mt8">
+                                    <label for="whatsapp_graph_api_token" class="col-lg-3 o_light_label"/>
+                                    <field name="whatsapp_graph_api_token" password="True"/>
+                                </div>
+                                <div class="row mt8">
+                                    <label for="whatsapp_app_secret" class="col-lg-3 o_light_label"/>
+                                    <field name="whatsapp_app_secret" password="True"/>
+                                </div>
+                                <div class="row mt8">
+                                    <label for="whatsapp_webhook_verify_token" class="col-lg-3 o_light_label"/>
+                                    <field name="whatsapp_webhook_verify_token"/>
+                                </div>
+                                <div class="mt16">
+                                    <button name="action_test_whatsapp_connection" 
+                                            type="object" 
+                                            string="Probar Conexión" 
+                                            class="btn-secondary" 
+                                            icon="fa-plug"/>
+                                </div>
+                            </div>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+</odoo>

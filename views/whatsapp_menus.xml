@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Top-level Menu -->
+    <menuitem id="menu_whatsapp_root" 
+              name="WhatsApp" 
+              web_icon="whatsapp_chatter_meta,static/description/icon.png"
+              sequence="25"/>
+
+    <!-- Submenus -->
+    <menuitem id="menu_whatsapp_messages" 
+              name="Bitácora de Mensajes" 
+              parent="menu_whatsapp_root" 
+              action="action_whatsapp_message" 
+              sequence="10"/>
+
+    <menuitem id="menu_whatsapp_templates" 
+              name="Plantillas Oficiales (HSM)" 
+              parent="menu_whatsapp_root" 
+              action="action_whatsapp_template" 
+              sequence="20"/>
+
+    <menuitem id="menu_whatsapp_configuration" 
+              name="Configuración" 
+              parent="menu_whatsapp_root" 
+              sequence="100"/>
+
+    <menuitem id="menu_whatsapp_accounts" 
+              name="Cuentas WhatsApp Cloud API" 
+              parent="menu_whatsapp_configuration" 
+              action="action_whatsapp_account" 
+              sequence="10"/>
+</odoo>

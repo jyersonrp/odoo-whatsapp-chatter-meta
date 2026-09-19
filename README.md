@@ -1,7 +1,7 @@
 # WhatsApp Chatter Integration for Odoo (Meta WhatsApp Cloud API)
 
 [![Odoo Version](https://img.shields.io/badge/Odoo-17.0%20%7C%2018.0%20%7C%2019.0-714B67.svg)](https://www.odoo.com)
-[![License: LGPL-3](https://img.shields.io/badge/License-LGPL--3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
+[![License: OPL-1 / CC BY-NC-ND 4.0](https://img.shields.io/badge/License-OPL--1%20%7C%20CC%20BY--NC--ND%204.0-blueviolet.svg)](LICENSE)
 [![Python Version](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12-3776AB.svg?logo=python&logoColor=white)](https://www.python.org)
 [![Meta Graph API](https://img.shields.io/badge/Meta%20Graph%20API-v21.0-0081FB.svg?logo=meta&logoColor=white)](https://developers.facebook.com/docs/whatsapp/cloud-api)
 [![Tests](https://img.shields.io/badge/Tests-32%20passed%20(100%25)-brightgreen.svg)]()
@@ -282,7 +282,14 @@ whatsapp_chatter_meta/
 
 ## 📄 Licencia
 
-Este proyecto está bajo la Licencia **GNU Lesser General Public License v3.0 (LGPL-3)**. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+Este módulo está protegido bajo los términos de **Odoo Proprietary License v1.0 (OPL-1)** y la licencia **Creative Commons Atribución-NoComercial-SinDerivadas 4.0 Internacional (CC BY-NC-ND 4.0)**.
+
+- **Prohibición de Redistribución y Reventa**: Queda estrictamente prohibida la venta, sublicenciamiento, distribución pública, publicación en Odoo Apps Store u otros marketplaces sin la autorización previa por escrito del autor.
+- **Sin Obras Derivadas (ND)**: No se permite la distribución de versiones modificadas, bifurcaciones (forks) ni adaptaciones comerciales del módulo.
+- **Uso para Evaluación y Aprendizaje**: Se autoriza la descarga y revisión del código exclusivamente con fines de evaluación técnica personal, auditoría y aprendizaje académico.
+- **Atribución (BY)**: Todo reconocimiento debe acreditar la autoría original a **Yerson José Rodríguez Pérez** ([@jyersonrp](https://github.com/jyersonrp)).
+
+Consulta el archivo [LICENSE](LICENSE) para conocer los términos legales completos.
 
 ---
 

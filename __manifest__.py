@@ -43,5 +43,5 @@ Módulo de Integración de WhatsApp Transaccional en el Chatter (Odoo + Meta API
     'installable': True,
     'application': True,
     'auto_install': False,
-    'license': 'LGPL-3',
+    'license': 'OPL-1',
 }

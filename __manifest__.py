@@ -1,47 +1,52 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 {
-    'name': 'WhatsApp Chatter Integration (Meta Cloud API)',
-    'version': '19.0.1.0.0',
-    'category': 'Sales/Marketing',
-    'summary': 'Transactional WhatsApp Chatter Integration with Meta WhatsApp Cloud API',
-    'description': """
-Módulo de Integración de WhatsApp Transaccional en el Chatter (Odoo + Meta API)
-=============================================================================
-- Botón de acción en cabecera: "Enviar por WhatsApp" en sale.order y account.move que abre un Wizard con texto y plantilla precargada.
-- Generación de PDF en memoria: Compila reporte de cotización/factura vía ir.actions.report._render_qweb_pdf y lo sube como binario a Meta Cloud API (/media).
-- Despacho de mensajes tipo document con media_id y nombre amigable (Cotizacion_SO001.pdf / Factura_INV001.pdf).
-- Webhook receptor (Controller http.route /whatsapp/webhook):
-  * Handshake GET con validación de hub.verify_token.
-  * Verificación criptográfica POST HMAC-SHA256 con App Secret (X-Hub-Signature-256).
-  * Correlación con contexto (context.id / wamid) o búsqueda de último documento abierto del contacto.
-  * Publicación automática de respuestas y eventos de entrega en el Chatter.
-- Gestión multi-compañía de cuentas whatsapp.account integrada en Ajustes.
-- Bitácora de auditoría whatsapp.message.
+    "name": "WhatsApp Chatter Integration (Meta Cloud API)",
+    "version": "19.0.1.0.0",
+    "category": "Sales/Marketing",
+    "summary": "Direct Meta WhatsApp Cloud API Integration for Odoo Chatter with Bilingual (EN/ES) Support",
+    "description": """
+WhatsApp Cloud API Integration for Odoo Chatter (Meta Graph API v21.0+)
+========================================================================
+Enterprise-grade bidirectional WhatsApp integration for Quotations, Invoices, and Contacts.
+
+Key Features:
+-------------
+- Full Bilingual Support (i18n): Standard Odoo translations for English (en_US) and Spanish (es, es_ES).
+- Header Action Button: "Send via WhatsApp" on sale.order and account.move launching a dynamic composer wizard.
+- In-Memory PDF Compilation: Generates quotation/invoice PDFs using ir.actions.report._render_qweb_pdf() and uploads directly to Meta Cloud API (/media) without temporary disk files.
+- Dynamic 24-Hour Window Validation: Distinguishes between active 24-hour service conversations (freeform text allowed) and expired windows (Meta HSM templates required).
+- High-Security Webhook (/whatsapp/webhook):
+  * GET verification handshake with hub.verify_token and hub.challenge.
+  * POST cryptographic validation using HMAC-SHA256 (X-Hub-Signature-256) against Meta App Secret.
+  * Automatic thread correlation (context.id / wamid) linking replies to the active document Chatter.
+  * Real-time message status updates (sent, delivered, read, failed).
+- Multi-Company Management: Dedicated WhatsApp accounts configurable per company with default fallback in Settings.
+- Message Audit Log: Full historical tracking with raw Meta JSON payloads for complete observability.
     """,
-    'author': 'Yerson R.',
-    'depends': [
-        'base',
-        'mail',
-        'sale',
-        'account',
-        'phone_validation',
+    "author": "Yerson R.",
+    "depends": [
+        "base",
+        "mail",
+        "sale",
+        "account",
+        "phone_validation",
     ],
-    'data': [
-        'security/whatsapp_security.xml',
-        'security/ir.model.access.csv',
-        'views/whatsapp_account_views.xml',
-        'views/whatsapp_template_views.xml',
-        'views/whatsapp_message_views.xml',
-        'views/res_config_settings_views.xml',
-        'views/sale_order_views.xml',
-        'views/account_move_views.xml',
-        'wizard/whatsapp_composer_wizard_views.xml',
-        'views/whatsapp_menus.xml',
+    "data": [
+        "security/whatsapp_security.xml",
+        "security/ir.model.access.csv",
+        "data/whatsapp_cron_data.xml",
+        "views/whatsapp_account_views.xml",
+        "views/whatsapp_template_views.xml",
+        "views/whatsapp_message_views.xml",
+        "views/res_config_settings_views.xml",
+        "views/sale_order_views.xml",
+        "views/account_move_views.xml",
+        "wizard/whatsapp_composer_wizard_views.xml",
+        "views/whatsapp_menus.xml",
     ],
-    'installable': True,
-    'application': True,
-    'auto_install': False,
-    'license': 'OPL-1',
+    "installable": True,
+    "application": True,
+    "auto_install": False,
+    "license": "LGPL-3",
 }

@@ -5,23 +5,23 @@
         <field name="name">whatsapp.message.search</field>
         <field name="model">whatsapp.message</field>
         <field name="arch" type="xml">
-            <search string="Buscar Mensajes de WhatsApp">
+            <search string="Search WhatsApp Messages">
                 <field name="name"/>
                 <field name="wamid"/>
                 <field name="sender"/>
                 <field name="recipient"/>
                 <field name="partner_id"/>
                 <field name="res_model"/>
-                <filter string="Entrantes" name="filter_inbound" domain="[('direction', '=', 'inbound')]"/>
-                <filter string="Salientes" name="filter_outbound" domain="[('direction', '=', 'outbound')]"/>
+                <filter string="Inbound" name="filter_inbound" domain="[('direction', '=', 'inbound')]"/>
+                <filter string="Outbound" name="filter_outbound" domain="[('direction', '=', 'outbound')]"/>
                 <separator/>
-                <filter string="Fallidos" name="filter_failed" domain="[('status', '=', 'failed')]"/>
-                <filter string="Entregados/Leídos" name="filter_delivered" domain="[('status', 'in', ('delivered', 'read'))]"/>
+                <filter string="Failed" name="filter_failed" domain="[('status', '=', 'failed')]"/>
+                <filter string="Delivered/Read" name="filter_delivered" domain="[('status', 'in', ('delivered', 'read'))]"/>
                 <group>
-                    <filter string="Dirección" name="group_direction" context="{'group_by': 'direction'}"/>
-                    <filter string="Estado" name="group_status" context="{'group_by': 'status'}"/>
-                    <filter string="Contacto" name="group_partner" context="{'group_by': 'partner_id'}"/>
-                    <filter string="Fecha" name="group_date" context="{'group_by': 'date:day'}"/>
+                    <filter string="Direction" name="group_direction" context="{'group_by': 'direction'}"/>
+                    <filter string="Status" name="group_status" context="{'group_by': 'status'}"/>
+                    <filter string="Contact" name="group_partner" context="{'group_by': 'partner_id'}"/>
+                    <filter string="Date" name="group_date" context="{'group_by': 'date:day'}"/>
                 </group>
             </search>
         </field>
@@ -32,7 +32,7 @@
         <field name="name">whatsapp.message.list</field>
         <field name="model">whatsapp.message</field>
         <field name="arch" type="xml">
-            <list string="Bitácora de Mensajes de WhatsApp" create="false" edit="false">
+            <list string="WhatsApp Message Logs" create="false" edit="false">
                 <field name="date"/>
                 <field name="name"/>
                 <field name="wamid" optional="hide"/>
@@ -61,7 +61,7 @@
         <field name="name">whatsapp.message.form</field>
         <field name="model">whatsapp.message</field>
         <field name="arch" type="xml">
-            <form string="Auditoría de Mensaje de WhatsApp" create="false" edit="false">
+            <form string="WhatsApp Message Audit" create="false" edit="false">
                 <sheet>
                     <div class="oe_title">
                         <label for="name"/>
@@ -70,7 +70,7 @@
                         </h1>
                     </div>
                     <group>
-                        <group string="Detalles de Entrega">
+                        <group string="Delivery Details">
                             <field name="wamid"/>
                             <field name="date"/>
                             <field name="direction"/>
@@ -83,7 +83,7 @@
                             <field name="error_code" invisible="status != 'failed'"/>
                             <field name="error_message" invisible="status != 'failed'"/>
                         </group>
-                        <group string="Interlocutores y Documento">
+                        <group string="Parties and Document">
                             <field name="account_id"/>
                             <field name="sender"/>
                             <field name="recipient"/>
@@ -95,10 +95,10 @@
                         </group>
                     </group>
                     <notebook>
-                        <page string="Contenido del Mensaje">
+                        <page string="Message Content">
                             <field name="body" readonly="1" widget="text"/>
                         </page>
-                        <page string="Payload JSON Crudo" groups="base.group_no_one">
+                        <page string="Raw JSON Payload" groups="base.group_no_one">
                             <field name="raw_payload" readonly="1"/>
                         </page>
                     </notebook>
@@ -109,13 +109,13 @@
 
     <!-- Action -->
     <record id="action_whatsapp_message" model="ir.actions.act_window">
-        <field name="name">Bitácora de Mensajes</field>
+        <field name="name">Message Logs</field>
         <field name="res_model">whatsapp.message</field>
         <field name="view_mode">list,form</field>
         <field name="search_view_id" ref="view_whatsapp_message_search"/>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-                Historial y bitácora de mensajes de WhatsApp transaccionales despachados y recibidos.
+                History and audit log of dispatched and received transactional WhatsApp messages.
             </p>
         </field>
     </record>

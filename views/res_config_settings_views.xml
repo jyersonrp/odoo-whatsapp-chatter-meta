@@ -8,14 +8,14 @@
         <field name="arch" type="xml">
             <xpath expr="//form" position="inside">
                 <app string="WhatsApp Meta" name="whatsapp_chatter_meta">
-                    <block title="Integración WhatsApp Cloud API" id="whatsapp_settings_container">
-                        <setting id="whatsapp_account_setting" string="Cuenta Activa" help="Seleccione o configure la cuenta de Meta WhatsApp Cloud API para esta compañía">
+                    <block title="WhatsApp Cloud API Integration" id="whatsapp_settings_container">
+                        <setting id="whatsapp_account_setting" string="Active Account" help="Select or configure the Meta WhatsApp Cloud API account for this company">
                             <field name="whatsapp_account_id"/>
                             <div class="mt8" invisible="not whatsapp_account_id">
-                                <button name="%(action_whatsapp_account)d" icon="oi-arrow-right" type="action" string="Administrar Cuentas" class="btn-link"/>
+                                <button name="%(action_whatsapp_account)d" icon="oi-arrow-right" type="action" string="Manage Accounts" class="btn-link"/>
                             </div>
                         </setting>
-                        <setting id="whatsapp_credentials_setting" string="Credenciales de Meta" help="Parámetros de conexión con la Graph API" invisible="not whatsapp_account_id">
+                        <setting id="whatsapp_credentials_setting" string="Meta Credentials" help="Connection parameters for Graph API" invisible="not whatsapp_account_id">
                             <div class="content-group">
                                 <div class="row mt16">
                                     <label for="whatsapp_phone_number_id" class="col-lg-3 o_light_label"/>
@@ -40,9 +40,29 @@
                                 <div class="mt16">
                                     <button name="action_test_whatsapp_connection" 
                                             type="object" 
-                                            string="Probar Conexión" 
+                                            string="Test Connection" 
                                             class="btn-secondary" 
                                             icon="fa-plug"/>
+                                </div>
+                            </div>
+                        </setting>
+                    </block>
+                    <block title="Automatic Escalation and Collections" id="whatsapp_escalation_settings_container">
+                        <setting id="whatsapp_escalation_setting" 
+                                 string="Inactivity Threshold for Call Escalation" 
+                                 help="Defines the waiting hours after sending an unreplied outbound WhatsApp message before automatically creating a Call activity for the document responsible.">
+                            <div class="content-group">
+                                <div class="mt16 d-flex align-items-center">
+                                    <label for="whatsapp_escalation_hours" class="o_form_label me-2" string="Inactivity time:"/>
+                                    <field name="whatsapp_escalation_hours" class="oe_inline text-end" style="width: 80px;"/>
+                                    <span class="o_form_label oe_inline ms-2">hours</span>
+                                </div>
+                                <div class="text-muted mt8">
+                                    <small>
+                                        <i class="fa fa-info-circle text-primary me-1"/>
+                                        Global default value: <strong>72 hours</strong> (3 days). 
+                                        This threshold can be customized individually on each official HSM template.
+                                    </small>
                                 </div>
                             </div>
                         </setting>

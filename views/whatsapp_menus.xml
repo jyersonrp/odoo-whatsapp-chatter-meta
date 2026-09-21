@@ -8,24 +8,24 @@
 
     <!-- Submenus -->
     <menuitem id="menu_whatsapp_messages" 
-              name="Bitácora de Mensajes" 
+              name="Message Logs" 
               parent="menu_whatsapp_root" 
               action="action_whatsapp_message" 
               sequence="10"/>
 
     <menuitem id="menu_whatsapp_templates" 
-              name="Plantillas Oficiales (HSM)" 
+              name="Official Templates (HSM)" 
               parent="menu_whatsapp_root" 
               action="action_whatsapp_template" 
               sequence="20"/>
 
     <menuitem id="menu_whatsapp_configuration" 
-              name="Configuración" 
+              name="Configuration" 
               parent="menu_whatsapp_root" 
               sequence="100"/>
 
     <menuitem id="menu_whatsapp_accounts" 
-              name="Cuentas WhatsApp Cloud API" 
+              name="WhatsApp Cloud API Accounts" 
               parent="menu_whatsapp_configuration" 
               action="action_whatsapp_account" 
               sequence="10"/>

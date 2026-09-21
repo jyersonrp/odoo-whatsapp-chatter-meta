@@ -3,6 +3,8 @@ access_whatsapp_account_user,whatsapp.account.user,model_whatsapp_account,base.g
 access_whatsapp_account_manager,whatsapp.account.manager,model_whatsapp_account,base.group_system,1,1,1,1
 access_whatsapp_template_user,whatsapp.template.user,model_whatsapp_template,base.group_user,1,0,0,0
 access_whatsapp_template_manager,whatsapp.template.manager,model_whatsapp_template,base.group_system,1,1,1,1
-access_whatsapp_message_user,whatsapp.message.user,model_whatsapp_message,base.group_user,1,1,1,0
+access_whatsapp_template_button_user,whatsapp.template.button.user,model_whatsapp_template_button,base.group_user,1,0,0,0
+access_whatsapp_template_button_manager,whatsapp.template.button.manager,model_whatsapp_template_button,base.group_system,1,1,1,1
+access_whatsapp_message_user,whatsapp.message.user,model_whatsapp_message,base.group_user,1,0,0,0
 access_whatsapp_message_manager,whatsapp.message.manager,model_whatsapp_message,base.group_system,1,1,1,1
 access_whatsapp_composer_wizard_user,whatsapp.composer.wizard.user,model_whatsapp_composer_wizard,base.group_user,1,1,1,1

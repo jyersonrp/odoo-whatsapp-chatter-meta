@@ -1,269 +1,289 @@
+[English](README.md) | [Español](README_es.md)
+
 # WhatsApp Chatter Integration for Odoo (Meta WhatsApp Cloud API)
 
 [![Odoo Version](https://img.shields.io/badge/Odoo-17.0%20%7C%2018.0%20%7C%2019.0-714B67.svg)](https://www.odoo.com)
-[![License: OPL-1 / CC BY-NC-ND 4.0](https://img.shields.io/badge/License-OPL--1%20%7C%20CC%20BY--NC--ND%204.0-blueviolet.svg)](LICENSE)
+[![License: LGPL-3](https://img.shields.io/badge/License-LGPL--3-blue.svg)](LICENSE)
 [![Python Version](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12-3776AB.svg?logo=python&logoColor=white)](https://www.python.org)
 [![Meta Graph API](https://img.shields.io/badge/Meta%20Graph%20API-v21.0-0081FB.svg?logo=meta&logoColor=white)](https://developers.facebook.com/docs/whatsapp/cloud-api)
-[![Tests](https://img.shields.io/badge/Tests-32%20passed%20(100%25)-brightgreen.svg)]()
+[![Tests](https://img.shields.io/badge/Tests-204%20passed%20(100%25)-brightgreen.svg)]()
 [![Author](https://img.shields.io/badge/Author-Yerson%20R.-orange.svg)]()
 
-Módulo empresarial para **Odoo** (Community y Enterprise) que integra la **API oficial de WhatsApp Cloud de Meta** de manera nativa y bidireccional en el **Chatter** de Presupuestos/Ventas (`sale.order`), Facturas (`account.move`) y Contactos (`res.partner`).
+Enterprise-grade module for **Odoo** (Community and Enterprise editions) that seamlessly and bidirectionally integrates the **Official Meta WhatsApp Cloud API** into the **Chatter** of Quotations/Sales Orders (`sale.order`), Invoices (`account.move`), and Contacts (`res.partner`).
 
-Permite el envío y recepción de mensajes de WhatsApp, despacho automático de cotizaciones y facturas en formato PDF generado en memoria, validación de la ventana de servicio de 24 horas y auditoría completa de mensajes sin costos mensuales adicionales ni intermediarios (BSP) de terceros.
-
----
-
-## 🚀 Características Principales
-
-- **Conexión Directa con Meta WhatsApp Cloud API**:
-  - Sin comisiones a terceros ni intermediarios pagos (Twilio, 360dialog, etc.).
-  - Acceso directo a las 1,000 conversaciones de servicio al cliente gratuitas mensuales otorgadas por Meta.
-  - Compatible con Meta Graph API v21.0+.
-- **Despacho de Documentos con PDF en Memoria**:
-  - Compila presupuestos de venta y facturas al vuelo usando `ir.actions.report._render_qweb_pdf()`.
-  - Sube el binario directamente a los servidores multimedia de Meta (`POST /{phone_number_id}/media`).
-  - Cero almacenamiento en disco temporal; el PDF se adjunta automáticamente en el Chatter de Odoo.
-- **Detección Dinámica de la Ventana de 24 Horas**:
-  - Valida en tiempo real si el cliente ha enviado un mensaje en las últimas 24 horas.
-  - **Dentro de la ventana**: Permite mensajes de texto libre (`freeform`) o plantillas.
-  - **Fuera de la ventana**: Exige y valida el uso obligatorio de plantillas pre-aprobadas de Meta (HSM) para cumplir estrictamente con las políticas de WhatsApp Business.
-- **Mapeo Dinámico de Variables en Plantillas**:
-  - Asignación flexible de campos de Odoo a variables de plantilla (ej. `partner_id.name, name, amount_total`).
-  - Formateo inteligente automático de montos monetarios según la moneda del documento.
-- **Webhook Bidireccional de Alta Seguridad**:
-  - **Handshake GET**: Validación del `hub.verify_token` y retorno del desafío `hub.challenge`.
-  - **Firma Criptográfica HMAC-SHA256**: Valida el encabezado `X-Hub-Signature-256` contra el `App Secret` de Meta para evitar suplantaciones.
-  - **Idempotencia**: Protección contra mensajes duplicados mediante control de `wamid`.
-  - **Correlación de Mensajes**: Si el cliente responde citando un mensaje o sobre un documento abierto, la respuesta ingresa automáticamente en el Chatter del presupuesto o factura correspondiente.
-  - **Actualización de Estados en Tiempo Real**: Rastreo de estados (`sent`, `delivered`, `read`, `failed`) y registro de advertencias visibles en el Chatter si un mensaje falla.
-- **Arquitectura Multi-Compañía**:
-  - Soporta múltiples cuentas de WhatsApp asociadas a diferentes compañías de Odoo.
-  - Selección de cuenta por defecto en los Ajustes Generales de la empresa.
-- **Suscripción Automática a Webhooks**:
-  - Al presionar **"Probar Conexión"**, el módulo auto-suscribe la aplicación de Meta a los webhooks de la cuenta comercial WABA (`POST /{waba_id}/subscribed_apps`).
+Enables sending and receiving WhatsApp messages, automatic dispatch of quotations and invoices as in-memory generated PDFs, real-time 24-hour customer service window validation, and full message audit logging without recurring monthly fees or third-party Business Solution Providers (BSPs).
 
 ---
 
-## 📋 Requisitos Previos
+## 🚀 Key Features
 
-1. **Odoo**: Versión 17.0, 18.0 o 19.0 (Community o Enterprise).
-2. **Python**: Versión 3.10 o superior con las librerías:
+- **Direct Meta WhatsApp Cloud API Connection**:
+  - No third-party gateway commissions or intermediary subscriptions (Twilio, 360dialog, etc.).
+  - Direct access to Meta's 1,000 free monthly customer-initiated service conversations.
+  - Full compatibility with Meta Graph API v21.0+.
+- **Full Bilingual Support (i18n)**:
+  - Standard Odoo internationalization in English (`en_US`) and Spanish (`es`, `es_ES`).
+  - Views, menus, actions, health statuses (`whatsapp_health_state`), wizard buttons, and chatter notifications fully translated.
+- **In-Memory PDF Document Dispatch**:
+  - Compiles sales quotations and customer invoices on the fly using `ir.actions.report._render_qweb_pdf()`.
+  - Directly uploads binary streams to Meta media servers (`POST /{phone_number_id}/media`).
+  - Zero temporary disk storage; the generated PDF is automatically attached to the Odoo Chatter thread.
+- **Dynamic 24-Hour Service Window Detection**:
+  - Validates in real time whether the customer has sent a message within the last 24 hours.
+  - **Inside the window**: Allows standard freeform text or approved templates.
+  - **Outside the window**: Strictly enforces and validates pre-approved Meta HSM templates to maintain compliance with WhatsApp Business policies.
+- **Dynamic Template Variable Mapping**:
+  - Flexible binding of Odoo record fields to template placeholders (e.g., `partner_id.name, name, amount_total`).
+  - Intelligent monetary formatting respecting currency symbols and precision.
+- **High-Security Bidirectional Webhook**:
+  - **GET Handshake**: Validates `hub.verify_token` and responds with the expected `hub.challenge`.
+  - **HMAC-SHA256 Cryptographic Verification**: Verifies `X-Hub-Signature-256` headers against the Meta `App Secret` to prevent spoofing.
+  - **Idempotency**: Message deduplication and replay protection via `wamid` tracking.
+  - **Smart Thread Correlation**: When a customer replies to a message, the inbound text is routed directly into the originating quotation or invoice Chatter thread.
+  - **Real-Time Status Updates**: Tracks message states (`sent`, `delivered`, `read`, `failed`) and posts prominent alerts in Chatter on delivery errors.
+- **Multi-Company Architecture**:
+  - Supports multiple WhatsApp Business Accounts configured per Odoo company.
+  - Default account selection in General Company Settings.
+- **Automated Webhook App Subscription**:
+  - Clicking **"Test Connection"** automatically subscribes the Meta app to the WABA webhooks (`POST /{waba_id}/subscribed_apps`).
+
+---
+
+## 📋 Prerequisites
+
+1. **Odoo**: Version 17.0, 18.0, or 19.0 (Community or Enterprise).
+2. **Python**: Version 3.10+ with required libraries:
    - `requests`
    - `cryptography`
-   - `phonenumbers` *(opcional pero recomendado para formateo E.164 internacional)*
-3. **Wkhtmltopdf**: Instalado en el sistema para la generación de reportes PDF. *(El módulo incluye auto-detección de rutas para entornos Windows)*.
+   - `phonenumbers` *(optional, recommended for E.164 phone normalization)*
+   - `polib` *(for i18n testing)*
+3. **Wkhtmltopdf**: Installed on the host system for PDF report generation. *(Includes auto-detection fallback for Windows environments)*.
 4. **Meta for Developers**:
-   - Una cuenta en [Meta for Developers](https://developers.facebook.com/).
-   - Una Aplicación de tipo **Business** con el producto **WhatsApp** configurado.
-   - Un número de teléfono verificado o de prueba en WhatsApp Cloud API.
-   - Un **System User** con token de acceso permanente y permisos `whatsapp_business_messaging` y `whatsapp_business_management`.
-5. **URL Pública con HTTPS**:
-   - Se requiere un endpoint accesible públicamente con SSL/HTTPS para recibir los Webhooks de Meta (ej. dominio de producción, o túneles como Cloudflare Tunnel / ngrok para desarrollo).
+   - An active account on [Meta for Developers](https://developers.facebook.com/).
+   - A **Business App** with the **WhatsApp** product added.
+   - A verified or test phone number in WhatsApp Cloud API.
+   - A **System User** permanent access token with `whatsapp_business_messaging` and `whatsapp_business_management` permissions.
+5. **Public HTTPS Endpoint**:
+   - A publicly accessible URL with SSL/HTTPS to receive Meta Webhooks (e.g., production domain, or tunnels like Cloudflare Tunnel / ngrok for development).
 
 ---
 
-## 🛠️ Instalación
+## 🛠️ Installation
 
-1. **Descargar / Clonar el repositorio**:
-   Coloca la carpeta `whatsapp_chatter_meta` dentro de la carpeta de addons personalizados de tu instancia de Odoo:
+1. **Download / Clone the repository**:
+   Place the `whatsapp_chatter_meta` directory into your Odoo custom addons directory:
    ```bash
-   cd /ruta/a/tu/odoo/addons
-   git clone https://github.com/tu-usuario/whatsapp_chatter_meta.git
+   cd /path/to/your/odoo/addons
+   git clone https://github.com/your-user/whatsapp_chatter_meta.git
    ```
 
-2. **Verificar dependencias de Python**:
-   En el entorno virtual (`venv`) de Odoo, asegúrate de tener las librerías requeridas:
+2. **Verify Python dependencies**:
+   Inside your Odoo virtual environment (`venv`), ensure dependencies are installed:
    ```bash
-   pip install requests phonenumbers
+   pip install requests phonenumbers polib
    ```
 
-3. **Instalar el módulo en Odoo**:
-   - Inicia tu servidor Odoo y activa el **Modo Desarrollador** (`?debug=1`).
-   - Ve a **Aplicaciones > Actualizar lista de aplicaciones**.
-   - Busca `WhatsApp Chatter Integration` o `whatsapp_chatter_meta`.
-   - Haz clic en **Activar / Instalar**.
+3. **Install the module in Odoo**:
+   - Start your Odoo server and enable **Developer Mode** (`?debug=1`).
+   - Navigate to **Apps > Update Apps List**.
+   - Search for `WhatsApp Chatter Integration` or `whatsapp_chatter_meta`.
+   - Click **Activate / Install**.
 
 ---
 
-## ⚙️ Guía de Configuración
+## ⚙️ Configuration Guide
 
-### 1. Obtener Credenciales en Meta for Developers
+### 1. Retrieve Credentials from Meta for Developers
 
-En el portal de [Meta Developers](https://developers.facebook.com/apps/):
-1. Selecciona tu aplicación comercial y entra a **WhatsApp > Configuración de la API**.
-2. Identifica y copia:
-   - **Identificador de número de teléfono** (`Phone Number ID`).
-   - **Identificador de la cuenta de WhatsApp Business** (`WABA ID`).
-   - **Token de acceso** (Genera un token de System User de larga duración).
-3. Entra a **Configuración de la app > Básica**:
-   - Copia la **Clave secreta de la app** (`App Secret`).
-4. Define un **Token de Verificación** propio (cualquier cadena secreta alfanumérica, ej. `mi_token_seguro_2026`).
-
----
-
-### 2. Configurar la Cuenta en Odoo
-
-1. En Odoo, dirígete al menú:
-   **WhatsApp > Configuración > Cuentas WhatsApp** (o a **Ajustes > WhatsApp**).
-2. Haz clic en **Nuevo** y diligencia los campos:
-   - **Nombre de la Cuenta**: Nombre descriptivo (ej. *WhatsApp Ventas Principal*).
-   - **Compañía**: Compañía a la que pertenece la cuenta.
-   - **Phone Number ID**: Identificador numérico provisto por Meta.
-   - **WABA ID**: Identificador de la cuenta de WhatsApp Business.
-   - **Token de Acceso**: Token de sistema con permisos de mensajería.
-   - **App Secret**: Clave secreta de la app de Meta.
-   - **Token de Verificación Webhook**: El token secreto elegido en el paso anterior.
-3. Haz clic en el botón **"Probar Conexión"**:
-   - El sistema enviará una petición a Meta para verificar la validez del token.
-   - Registrará automáticamente la suscripción de la app a los webhooks de tu WABA (`POST /{waba_id}/subscribed_apps`).
-   - Verás un aviso de confirmación exitoso.
-4. Copia el valor del campo de solo lectura **URL del Webhook** que se genera automáticamente (ej. `https://tu-dominio.com/whatsapp/webhook`).
+In the [Meta Developers Portal](https://developers.facebook.com/apps/):
+1. Select your business app and navigate to **WhatsApp > API Setup**.
+2. Locate and copy:
+   - **Phone Number ID** (`phone_number_id`).
+   - **WhatsApp Business Account ID** (`WABA ID`).
+   - **Access Token** (generate a long-lived System User token).
+3. Navigate to **App Settings > Basic**:
+   - Copy the **App Secret**.
+4. Define your own **Verification Token** (any secure alphanumeric string, e.g., `my_secure_token_2026`).
 
 ---
 
-### 3. Configurar el Webhook en Meta
+### 2. Configure the WhatsApp Account in Odoo
 
-1. Vuelve al portal de **Meta Developers > WhatsApp > Configuración**.
-2. En la sección **Webhook**:
-   - Haz clic en **Editar**.
-   - **URL de devolución de llamada**: Pega la URL del Webhook generada por Odoo (`https://tu-dominio.com/whatsapp/webhook`).
-   - **Identificador de verificación**: Escribe el mismo *Token de Verificación* configurado en Odoo.
-   - Haz clic en **Verificar y guardar**.
-3. En la tabla de **Campos de webhook**, haz clic en **Administrar** y suscríbete al campo:
-   - ✅ **`messages`** *(indispensable para recibir mensajes entrantes y confirmaciones de entrega/lectura)*.
+1. In Odoo, open the menu:
+   **WhatsApp > Configuration > WhatsApp Accounts** (or **Settings > WhatsApp**).
+2. Click **New** and fill in the fields:
+   - **Account Name**: Descriptive name (e.g., *Main Sales WhatsApp*).
+   - **Company**: Odoo company associated with this account.
+   - **Phone Number ID**: Numeric identifier from Meta.
+   - **WABA ID**: WhatsApp Business Account identifier.
+   - **Access Token**: Permanent System User token.
+   - **App Secret**: Meta App Secret key.
+   - **Webhook Verification Token**: The secret verification token defined in step 1.
+3. Click the **"Test Connection"** button:
+   - The system queries Meta to verify token validity.
+   - Automatically registers the webhook subscription (`POST /{waba_id}/subscribed_apps`).
+   - Displays a success confirmation toast.
+4. Copy the read-only **Webhook URL** generated by the system (e.g., `https://your-domain.com/whatsapp/webhook`).
 
 ---
 
-### 4. Configuración de Plantillas (Templates HSM)
+### 3. Configure the Webhook in Meta
 
-Las plantillas deben crearse previamente en el [Administrador de WhatsApp de Meta](https://business.facebook.com/wa/manage/message-templates/) y aprobarse.
+1. Return to **Meta Developers > WhatsApp > Configuration**.
+2. In the **Webhook** section:
+   - Click **Edit**.
+   - **Callback URL**: Paste the Odoo Webhook URL (`https://your-domain.com/whatsapp/webhook`).
+   - **Verify Token**: Enter the exact *Verification Token* configured in Odoo.
+   - Click **Verify and save**.
+3. Under **Webhook fields**, click **Manage** and subscribe to:
+   - ✅ **`messages`** *(required for incoming messages and delivery/read receipts)*.
 
-Para sincronizarlas o configurarlas en Odoo:
-1. Ve a **WhatsApp > Configuración > Plantillas WhatsApp**.
-2. Haz clic en **Nuevo**:
-   - **Nombre de la Plantilla**: Debe coincidir exactamente con el nombre aprobado en Meta (ej. `envio_cotizacion`).
-   - **Modelo de Odoo**: Selecciona `sale.order` (Presupuesto) o `account.move` (Factura).
-   - **Idioma**: Código ISO del idioma (ej. `es`, `en_US`).
-   - **Tipo de Cabecera**:
-     - `document`: Si la plantilla de Meta tiene cabecera de tipo Documento (ideal para enviar con PDF adjunto).
-     - `none` / `text` / `image`: Según la configuración en Meta.
-   - **Cuerpo del Mensaje**: Texto con marcadores de posición, ej.:
+---
+
+### 4. Template Setup (HSM Templates)
+
+Templates must be created and approved in the [Meta WhatsApp Manager](https://business.facebook.com/wa/manage/message-templates/).
+
+To configure them in Odoo:
+1. Navigate to **WhatsApp > Configuration > WhatsApp Templates**.
+2. Click **New**:
+   - **Template Name**: Must match the approved Meta template name exactly (e.g., `quote_notification`).
+   - **Applies To**: Select `sale.order` (Quotation) or `account.move` (Invoice).
+   - **Language**: Language ISO code (e.g., `en_US`, `es`).
+   - **Header Type**:
+     - `document`: For templates with Document header (ideal for PDF attachments).
+     - `none` / `text` / `image`: According to your Meta setup.
+   - **Message Body**: Text with placeholders, e.g.:
      ```text
-     Hola {{1}}, adjuntamos la cotización {{2}} por un valor de {{3}}.
+     Hello {{1}}, please find attached quotation {{2}} for a total of {{3}}.
      ```
-   - **Mapeo de Variables**: Lista separada por comas con las rutas de los campos de Odoo que sustituirán las variables en orden:
+   - **Variable Mapping**: Comma-separated list of Odoo field paths:
      ```text
      partner_id.name, name, amount_total
      ```
-     *(El sistema detecta campos de tipo monetario y les aplica el símbolo y formato de la divisa automáticamente)*.
+     *(Monetary fields automatically include currency symbols and formatting)*.
 
 ---
 
-## 📖 Modo de Uso
+## 📖 How to Use
 
-### 1. Enviar Cotizaciones / Pedidos de Venta
-1. Entra a cualquier Presupuesto o Pedido de Venta en **Ventas > Presupuestos**.
-2. En la barra superior de acciones, haz clic en el botón **"Enviar por WhatsApp"**.
-3. Se abrirá el asistente (`WhatsApp Composer Wizard`):
-   - **Teléfono**: Cargado automáticamente en formato internacional E.164.
-   - **Estado de la Ventana**: Indica visualmente si la ventana de 24 horas está activa o inactiva.
-   - **Plantilla**: Selecciona la plantilla configurada para ventas.
-   - **Vista Previa**: Muestra el mensaje renderizado con los datos reales del pedido.
-   - **Adjuntar PDF**: Casilla habilitada por defecto. Genera el PDF oficial del presupuesto en memoria y lo envía como documento de WhatsApp.
-4. Haz clic en **"Enviar por WhatsApp"**:
-   - El mensaje y el documento se envían instantáneamente al cliente.
-   - Queda registrado en el **Chatter** con la fecha, identificador `wamid` de Meta y el PDF adjunto.
-
----
-
-### 2. Enviar Facturas de Clientes
-1. Entra a cualquier Factura de Cliente en **Contabilidad > Clientes > Facturas**.
-2. Haz clic en **"Enviar por WhatsApp"**.
-3. El asistente precargará la plantilla de facturas, el teléfono del cliente y el PDF de la factura (`Factura_INV_2026_0001.pdf`).
-4. Al enviar, el mensaje y archivo quedarán archivados en el Chatter de la factura.
+### 1. Sending Quotations / Sales Orders
+1. Open any Quotation or Sales Order in **Sales > Orders > Quotations**.
+2. In the header action buttons, click **"Send via WhatsApp"**.
+3. The **WhatsApp Composer Wizard** will appear:
+   - **Phone**: Pre-filled in international E.164 format.
+   - **Window State**: Visual badge showing whether the 24-hour window is active or expired.
+   - **Template**: Pre-selects the appropriate sales template.
+   - **Preview**: Live preview of rendered text with actual order values.
+   - **Attach PDF**: Enabled by default. Compiles the official PDF in memory and sends it as a WhatsApp document.
+4. Click **"Send via WhatsApp"**:
+   - The message and document are instantly dispatched.
+   - The message is recorded in the **Chatter** with timestamp, Meta `wamid`, and the attached PDF.
 
 ---
 
-### 3. Recepción de Respuestas y Trazabilidad
-- Cuando el cliente responde al mensaje de WhatsApp:
-  - El webhook de Odoo recibe la notificación y verifica criptográficamente la firma.
-  - Si el cliente respondió citando el mensaje, el texto se añade directamente al Chatter del documento origen.
-  - Si es una respuesta sin citar, el sistema busca el último presupuesto o factura activa con ese contacto y la anexa en su Chatter.
-  - Si no hay documentos abiertos, la respuesta se publica en el Chatter del contacto (`res.partner`).
-- Las confirmaciones de **Entregado** y **Leído** actualizan la bitácora interna.
-- Si Meta reporta un error de entrega (ej. número no registrado o plantilla rechazada), el sistema crea una nota de advertencia en el Chatter.
+### 2. Sending Customer Invoices
+1. Open any Customer Invoice in **Accounting > Customers > Invoices**.
+2. Click **"Send via WhatsApp"**.
+3. The wizard pre-loads the invoice template, customer phone number, and invoice PDF (`Invoice_INV_2026_0001.pdf`).
+4. Click send; the dispatch is logged in the invoice Chatter thread.
 
 ---
 
-### 4. Auditoría de Mensajes
-Accede a **WhatsApp > Mensajes** para visualizar el registro histórico completo:
-- Dirección (*Saliente / Entrante*).
-- Teléfono remitente y destinatario.
-- Estado (*Enviado, Entregado, Leído, Fallido*).
-- Identificador de Meta (`wamid`).
-- Enlace al documento relacionado (`sale.order`, `account.move`, `res.partner`).
-- Payload JSON completo recibido de Meta para depuración técnica.
+### 3. Inbound Responses and Traceability
+- When a customer replies on WhatsApp:
+  - The Odoo webhook receives the payload and cryptographically verifies the signature.
+  - Quoted replies are matched directly to the originating document Chatter.
+  - Unquoted replies correlate to the customer's most recent active quotation or invoice.
+  - If no active documents exist, the message logs into the contact's Chatter (`res.partner`).
+- **Delivered** and **Read** receipts update the internal message status in real time.
+- If Meta returns a delivery failure (e.g., invalid phone or template mismatch), an alert note is posted in Chatter.
 
 ---
 
-## 🧪 Pruebas Automatizadas
+### 4. Message Audit Logging
+Navigate to **WhatsApp > Messages** for a complete audit trail:
+- Direction (*Outbound / Inbound*).
+- Sender and recipient phone numbers.
+- Status (*Draft, Sent, Delivered, Read, Failed, Received*).
+- Meta message ID (`wamid`).
+- Originating document link (`sale.order`, `account.move`, `res.partner`).
+- Full raw JSON payload for debugging.
 
-El módulo incluye una suite integral de **32 pruebas automatizadas** que cubren:
-- Configuración de cuentas y manejo de errores de conexión/red.
-- Subida de archivos multimedia a Meta Cloud API (`/media`).
-- Formateo internacional de números de teléfono (E.164).
-- Validación de ventana de 24 horas (modo libre vs. plantillas).
-- Mapeo y formateo dinámico de variables y monedas.
-- Generación de PDF en memoria y despacho completo.
-- Despacho desde facturas y pedidos de venta.
-- Handshake GET del Webhook y validación de tokens.
-- Verificación criptográfica HMAC-SHA256 en peticiones POST.
-- Idempotencia del Webhook ante mensajes duplicados (`wamid`).
-- Correlación automática de respuestas al Chatter correcto.
+---
 
-### Cómo ejecutar las pruebas:
-Ejecuta el siguiente comando en tu terminal:
+## 🧪 Automated Testing Suite
+
+The module features a comprehensive suite of **204 automated tests** covering:
+- Exhaustive internationalization and translation checks (`.pot`, `en_US.po`, `es.po`, `es_ES.po`).
+- Account configuration, credential validation, and network error handling.
+- Binary media upload to Meta Cloud API (`/media`).
+- International phone normalization (E.164).
+- 24-hour customer service window enforcement (freeform vs. HSM template).
+- Dynamic variable and currency formatting.
+- In-memory PDF report generation and document dispatch.
+- Sales order and customer invoice dispatch workflows.
+- Webhook GET handshake and token verification.
+- HMAC-SHA256 signature verification on POST requests.
+- Webhook idempotency and deduplication via `wamid`.
+- Chatter thread correlation for incoming customer messages.
+- Cron-based message escalation and monitoring.
+
+### Running the Test Suite:
+Run the following command from your Odoo installation:
 
 ```bash
-python odoo-bin -d tu_base_de_datos -u whatsapp_chatter_meta --test-enable --stop-after-init --test-tags /whatsapp_chatter_meta
+python odoo-bin -d your_database -u whatsapp_chatter_meta --test-enable --stop-after-init --test-tags /whatsapp_chatter_meta
 ```
 
-**Resultado esperado:**
+**Expected Result:**
 ```text
-INFO odoo.tests.result: 0 failed, 0 error(s) of 32 tests
+INFO odoo.tests.result: 0 failed, 0 error(s) of 204 tests
 ```
 
 ---
 
-## 📂 Estructura del Módulo
+## 📂 Module Structure
 
 ```text
 whatsapp_chatter_meta/
-├── __init__.py                # Inicialización y auto-detección de wkhtmltopdf
-├── __manifest__.py            # Metadatos del módulo, dependencias y vistas
-├── LICENSE                    # Licencia LGPL-3.0
-├── README.md                  # Documentación técnica completa
+├── __init__.py                # Initialization and wkhtmltopdf auto-detection
+├── __manifest__.py            # Module metadata, dependencies, and view declarations
+├── LICENSE                    # OPL-1 License
+├── README.md                  # Comprehensive technical documentation in English
+├── README_es.md               # Comprehensive technical documentation in Spanish
 ├── controllers/
 │   ├── __init__.py
-│   └── webhook.py             # Controlador HTTP para el Webhook (/whatsapp/webhook)
+│   └── webhook.py             # HTTP Controller for Meta Webhook (/whatsapp/webhook)
+├── data/
+│   └── whatsapp_cron_data.xml # Scheduled actions and escalation crons
+├── i18n/
+│   ├── en_US.po               # English translation catalog
+│   ├── es.po                  # Spanish (generic) translation catalog
+│   ├── es_ES.po               # Spanish (Spain) translation catalog
+│   └── whatsapp_chatter_meta.pot # Translation template file
 ├── models/
 │   ├── __init__.py
-│   ├── account_move.py        # Extensión de Facturas (acción WhatsApp)
-│   ├── mail_thread.py         # Integración y correlación con el Chatter
-│   ├── res_company.py         # Relación con cuenta WhatsApp por defecto
-│   ├── res_config_settings.py # Configuración en Ajustes Generales
-│   ├── sale_order.py          # Extensión de Pedidos de Venta (acción WhatsApp)
-│   ├── whatsapp_account.py    # Modelo de Cuentas WhatsApp y cliente Meta API
-│   ├── whatsapp_message.py    # Bitácora de auditoría de mensajes
-│   └── whatsapp_template.py   # Gestión y renderizado de plantillas HSM
+│   ├── account_move.py        # Invoice extension (WhatsApp action)
+│   ├── mail_thread.py         # Chatter thread integration and correlation
+│   ├── res_company.py         # Company WhatsApp account association
+│   ├── res_config_settings.py # General Settings integration
+│   ├── sale_order.py          # Sales Order extension (WhatsApp action)
+│   ├── whatsapp_account.py    # WhatsApp Account model and Meta API client
+│   ├── whatsapp_message.py    # Message audit log
+│   └── whatsapp_template.py   # HSM template management and dynamic rendering
 ├── security/
-│   ├── ir.model.access.csv    # Permisos y listas de control de acceso (ACL)
-│   └── whatsapp_security.xml  # Reglas de seguridad y categorías
+│   ├── ir.model.access.csv    # Access Control Lists (ACL)
+│   └── whatsapp_security.xml  # Security groups and rules
 ├── tests/
 │   ├── __init__.py
-│   ├── test_whatsapp_account.py  # Tests de cuentas, conexión y despacho
-│   ├── test_whatsapp_composer.py # Tests del wizard, PDFs, E.164 y ventana 24h
-│   └── test_whatsapp_webhook.py  # Tests de seguridad, HMAC, webhooks y correlación
+│   ├── test_whatsapp_account.py      # Account, connection, and dispatch tests
+│   ├── test_whatsapp_composer.py     # Composer wizard, PDFs, E.164, and 24h window tests
+│   ├── test_whatsapp_e2e_tiers.py    # Multi-tier end-to-end flow tests
+│   ├── test_whatsapp_escalation.py   # Escalation and scheduled cron tests
+│   ├── test_whatsapp_i18n.py         # Internationalization and PO/POT syntax tests
+│   ├── test_whatsapp_media_and_health.py # Media upload and window health state tests
+│   └── test_whatsapp_webhook.py      # HMAC security, webhooks, and correlation tests
 ├── views/
 │   ├── account_move_views.xml
 │   ├── res_config_settings_views.xml
@@ -274,26 +294,22 @@ whatsapp_chatter_meta/
 │   └── whatsapp_template_views.xml
 └── wizard/
     ├── __init__.py
-    ├── whatsapp_composer_wizard.py       # Asistente para composición y envío
+    ├── whatsapp_composer_wizard.py       # Composition and sending wizard
     └── whatsapp_composer_wizard_views.xml
 ```
 
 ---
 
-## 📄 Licencia
+## 📄 License
 
-Este módulo está protegido bajo los términos de **Odoo Proprietary License v1.0 (OPL-1)** y la licencia **Creative Commons Atribución-NoComercial-SinDerivadas 4.0 Internacional (CC BY-NC-ND 4.0)**.
+This module is licensed under the **GNU Lesser General Public License v3.0 (LGPL-3.0)**.
+You may copy, distribute, modify, and integrate this software freely in commercial or open-source projects under the terms and conditions of LGPL-3.0.
 
-- **Prohibición de Redistribución y Reventa**: Queda estrictamente prohibida la venta, sublicenciamiento, distribución pública, publicación en Odoo Apps Store u otros marketplaces sin la autorización previa por escrito del autor.
-- **Sin Obras Derivadas (ND)**: No se permite la distribución de versiones modificadas, bifurcaciones (forks) ni adaptaciones comerciales del módulo.
-- **Uso para Evaluación y Aprendizaje**: Se autoriza la descarga y revisión del código exclusivamente con fines de evaluación técnica personal, auditoría y aprendizaje académico.
-- **Atribución (BY)**: Todo reconocimiento debe acreditar la autoría original a **Yerson José Rodríguez Pérez** ([@jyersonrp](https://github.com/jyersonrp)).
-
-Consulta el archivo [LICENSE](LICENSE) para conocer los términos legales completos.
+See [LICENSE](LICENSE) for full legal terms.
 
 ---
 
-## 👤 Autor
+## 👤 Author
 
-Desarrollado y mantenido por **Yerson R.**
-Cualquier duda, sugerencia o contribución es bienvenida mediante *Issues* o *Pull Requests* en el repositorio oficial.
+Developed and maintained by **Yerson R.**
+Feedback, issues, and contributions are welcome via GitHub *Issues* or *Pull Requests*.

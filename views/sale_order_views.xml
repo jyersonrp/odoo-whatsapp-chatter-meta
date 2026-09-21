@@ -8,10 +8,19 @@
         <field name="arch" type="xml">
             <xpath expr="//header" position="inside">
                 <button name="action_send_whatsapp" 
-                        string="Enviar por WhatsApp" 
+                        string="Send via WhatsApp" 
                         type="object" 
                         class="btn-primary" 
-                        icon="fa-whatsapp"/>
+                        icon="fa-whatsapp"
+                        invisible="state == 'cancel'"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="whatsapp_health_state" widget="badge"
+                       decoration-success="whatsapp_health_state == 'active'"
+                       decoration-warning="whatsapp_health_state == 'expired'"
+                       decoration-danger="whatsapp_health_state == 'cold'"
+                       decoration-muted="whatsapp_health_state == 'none'"
+                       invisible="not partner_id"/>
             </xpath>
         </field>
     </record>

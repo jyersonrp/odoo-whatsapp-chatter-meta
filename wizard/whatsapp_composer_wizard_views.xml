@@ -4,22 +4,22 @@
         <field name="name">whatsapp.composer.wizard.form</field>
         <field name="model">whatsapp.composer.wizard</field>
         <field name="arch" type="xml">
-            <form string="Enviar Mensaje por WhatsApp">
+            <form string="Send WhatsApp Message">
                 <field name="res_model" invisible="1"/>
                 <field name="res_id" invisible="1"/>
                 <field name="is_window_open" invisible="1"/>
 
                 <div class="alert alert-info d-flex align-items-center mb-3" role="alert" invisible="not is_window_open">
-                    <i class="fa fa-info-circle fa-2x me-2" title="Información"/>
+                    <i class="fa fa-info-circle fa-2x me-2" title="Information"/>
                     <div>
-                        <strong>Ventana de 24 Horas Activa:</strong> El cliente ha interactuado recientemente. Puede redactar un mensaje libre o seleccionar una plantilla HSM.
+                        <strong>24-Hour Window Active:</strong> The customer has recently interacted. You may write a freeform message or select an HSM template.
                     </div>
                 </div>
 
                 <div class="alert alert-warning d-flex align-items-center mb-3" role="alert" invisible="is_window_open">
-                    <i class="fa fa-exclamation-triangle fa-2x me-2" title="Advertencia"/>
+                    <i class="fa fa-exclamation-triangle fa-2x me-2" title="Warning"/>
                     <div>
-                        <strong>Ventana de 24 Horas Inactiva:</strong> Meta requiere el envío obligatorio de una Plantilla Oficial HSM aprobada para iniciar la conversación.
+                        <strong>24-Hour Window Inactive:</strong> Meta requires sending an approved Official HSM Template to initiate a conversation.
                     </div>
                 </div>
 
@@ -39,13 +39,25 @@
                 </group>
 
                 <notebook>
-                    <page string="Contenido del Mensaje">
+                    <page string="Message Content">
                         <field name="body" 
-                               placeholder="Redacte su mensaje o seleccione una plantilla para cargar el contenido dinámico..." 
+                               placeholder="Compose your message or select a template to load dynamic content..." 
                                widget="text" 
                                style="width: 100%; min-height: 120px;"/>
+                        <field name="has_buttons" invisible="1"/>
+                        <field name="button_summary" invisible="1"/>
+                        <div class="mt-3 p-3 bg-light border rounded" invisible="not has_buttons or message_mode != 'template'">
+                            <div class="d-flex align-items-center justify-content-between mb-2 pb-1 border-bottom">
+                                <div class="d-flex align-items-center text-muted fw-bold">
+                                    <i class="fa fa-mouse-pointer me-2 text-primary"/>
+                                    <span>Interactive Template Buttons (Meta WhatsApp)</span>
+                                </div>
+                                <span class="badge bg-secondary text-white">Preview</span>
+                            </div>
+                            <field name="button_preview_html" widget="html" nolabel="1" readonly="1" options="{'cssReadonly': True}"/>
+                        </div>
                     </page>
-                    <page string="Adjunto PDF Oficial">
+                    <page string="Official PDF Attachment">
                         <group>
                             <field name="attach_pdf"/>
                             <field name="pdf_filename" invisible="not attach_pdf"/>
@@ -55,8 +67,8 @@
                 </notebook>
 
                 <footer>
-                    <button string="Enviar por WhatsApp" name="action_send_whatsapp" type="object" class="btn-primary" icon="fa-whatsapp"/>
-                    <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                    <button string="Send via WhatsApp" name="action_send_whatsapp" type="object" class="btn-primary" icon="fa-whatsapp"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>
         </field>

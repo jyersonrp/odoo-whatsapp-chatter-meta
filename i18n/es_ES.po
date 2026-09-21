@@ -1,0 +1,1856 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-21 04:08+0000\n"
+"PO-Revision-Date: 2026-09-21 04:08+0000\n"
+"Last-Translator: \n"
+"Language-Team: Spanish (es_ES)\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_whatsapp_template__escalation_hours
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_whatsapp_template__escalation_threshold_hours
+msgid "0 = use company default threshold"
+msgstr "0 = usar el umbral predeterminado de la compañía"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_account_form
+msgid "1. Callback URL: <code>https://YOUR_DOMAIN/whatsapp/webhook</code>"
+msgstr ""
+"1. URL de devolución de llamada (Callback URL): "
+"<code>https://SU_DOMINIO/whatsapp/webhook</code>"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_account_form
+msgid ""
+"2. Verification Token: Enter the exact value configured in the "
+"<strong>Webhook Verify Token</strong> field."
+msgstr ""
+"2. Token de verificación: Ingrese el valor exacto configurado en el campo "
+"<strong>Webhook Verify Token</strong>."
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/wizard/whatsapp_composer_wizard.py:0
+msgid "24-Hour Window Closed"
+msgstr "Ventana de 24 Horas Cerrada"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_account_account__whatsapp_health_state
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_account_analytic_account__whatsapp_health_state
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_account_bank_statement_line__whatsapp_health_state
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_account_journal__whatsapp_health_state
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_account_move__whatsapp_health_state
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_account_payment__whatsapp_health_state
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_account_reconcile_model__whatsapp_health_state
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_account_setup_bank_manual_config__whatsapp_health_state
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_account_tax__whatsapp_health_state
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_crm_team__whatsapp_health_state
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_crm_team_member__whatsapp_health_state
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_discuss_channel__whatsapp_health_state
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_iap_account__whatsapp_health_state
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_ir_actions_server__whatsapp_health_state
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_ir_cron__whatsapp_health_state
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_mail_blacklist__whatsapp_health_state
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_mail_thread__whatsapp_health_state
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_mail_thread_blacklist__whatsapp_health_state
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_mail_thread_cc__whatsapp_health_state
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_mail_thread_main_attachment__whatsapp_health_state
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_mail_thread_phone__whatsapp_health_state
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_mail_tracking_duration_mixin__whatsapp_health_state
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_phone_blacklist__whatsapp_health_state
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_product_category__whatsapp_health_state
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_product_pricelist__whatsapp_health_state
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_product_product__whatsapp_health_state
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_product_template__whatsapp_health_state
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_res_company__whatsapp_health_state
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_res_partner__whatsapp_health_state
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_res_partner_bank__whatsapp_health_state
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_res_users__whatsapp_health_state
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_sale_order__whatsapp_health_state
+msgid "24-hour service window and WhatsApp thread health status."
+msgstr ""
+"Estado de salud del hilo de WhatsApp y de la ventana de servicio de 24 "
+"horas."
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_composer_wizard__is_window_open
+msgid "24h Window Active"
+msgstr "Ventana 24h Activa"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_account_form
+msgid ""
+"3. In the Webhook subscription fields, subscribe to the events: "
+"<code>messages</code>."
+msgstr ""
+"3. En los campos de suscripción de Webhook, suscriba los eventos: "
+"<code>messages</code>."
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_composer_wizard_form
+msgid "<i class=\"fa fa-exclamation-triangle fa-2x me-2\" title=\"Warning\"/>"
+msgstr "<i class=\"fa fa-exclamation-triangle fa-2x me-2\" title=\"Advertencia\"/>"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_composer_wizard_form
+msgid "<i class=\"fa fa-info-circle fa-2x me-2\" title=\"Information\"/>"
+msgstr "<i class=\"fa fa-info-circle fa-2x me-2\" title=\"Información\"/>"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_composer_wizard_form
+msgid ""
+"<i class=\"fa fa-mouse-pointer me-2 text-primary\"/>\n"
+"                                    <span>Interactive Template Buttons (Meta WhatsApp)</span>"
+msgstr ""
+"<i class=\"fa fa-mouse-pointer me-2 text-primary\"/>\n"
+"                                    <span>Botones Interactivos de la Plantilla (Meta WhatsApp)</span>"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/whatsapp_message.py:0
+msgid ""
+"<p>Alert: Stalled Communication. Collection management required. The "
+"WhatsApp message sent for invoice %s has received no reply.</p>"
+msgstr ""
+"<p>Alerta: Comunicación Estancada. Gestión de cobranza requerida. El mensaje"
+" de WhatsApp enviado para la factura %s no ha recibido respuesta.</p>"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/whatsapp_message.py:0
+msgid ""
+"<p>Alert: Stalled Communication. The WhatsApp message sent on %s has "
+"received no reply after the established waiting period.</p>"
+msgstr ""
+"<p>Alerta: Comunicación Estancada. El mensaje de WhatsApp enviado el %s no "
+"ha recibido respuesta tras el período de espera establecido.</p>"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.res_config_settings_view_form_inherit_whatsapp
+msgid ""
+"<small>\n"
+"                                        <i class=\"fa fa-info-circle text-primary me-1\"/>\n"
+"                                        Global default value: <strong>72 hours</strong> (3 days). \n"
+"                                        This threshold can be customized individually on each official HSM template.\n"
+"                                    </small>"
+msgstr ""
+"<small>\n"
+"                                        <i class=\"fa fa-info-circle text-primary me-1\"/>\n"
+"                                        Valor predeterminado global: <strong>72 horas</strong> (3 días). \n"
+"                                        Este umbral puede personalizarse individualmente en cada plantilla oficial HSM.\n"
+"                                    </small>"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_composer_wizard_form
+msgid "<span class=\"badge bg-secondary text-white\">Preview</span>"
+msgstr "<span class=\"badge bg-secondary text-white\">Previsualización</span>"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.res_config_settings_view_form_inherit_whatsapp
+msgid "<span class=\"o_form_label oe_inline ms-2\">hours</span>"
+msgstr "<span class=\"o_form_label oe_inline ms-2\">horas</span>"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_template_form
+msgid ""
+"<span>hours</span>\n"
+"                                <span class=\"text-muted ms-2\">(0 = use company global)</span>"
+msgstr ""
+"<span>horas</span>\n"
+"                                <span class=\"text-muted ms-2\">(0 = usar global de compañía)</span>"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_composer_wizard_form
+msgid ""
+"<strong>24-Hour Window Active:</strong> The customer has recently "
+"interacted. You may write a freeform message or select an HSM template."
+msgstr ""
+"<strong>Ventana de 24 Horas Activa:</strong> El cliente ha interactuado "
+"recientemente. Puede redactar un mensaje libre o seleccionar una plantilla "
+"HSM."
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_composer_wizard_form
+msgid ""
+"<strong>24-Hour Window Inactive:</strong> Meta requires sending an approved "
+"Official HSM Template to initiate a conversation."
+msgstr ""
+"<strong>Ventana de 24 Horas Inactiva:</strong> Meta requiere el envío "
+"obligatorio de una Plantilla Oficial HSM aprobada para iniciar la "
+"conversación."
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_template_form
+msgid ""
+"<strong>Call Phone (PHONE_NUMBER):</strong> Opens the customer's phone "
+"dialer (max. 1 button). Does not accept variables."
+msgstr ""
+"<strong>Llamar Teléfono (PHONE_NUMBER):</strong> Abre el marcador telefónico"
+" del cliente (máx. 1 botón). No admite variables."
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_account_form
+msgid "<strong>Configuration in Meta Developers Portal:</strong>"
+msgstr "<strong>Configuración en Meta Developers Portal:</strong>"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_template_form
+msgid "<strong>Official Meta Cloud API specifications:</strong>"
+msgstr "<strong>Especificaciones oficiales de Meta Cloud API:</strong>"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_template_form
+msgid ""
+"<strong>Quick Reply (QUICK_REPLY):</strong> Sends a predefined response when"
+" clicked and reactivates the 24-hour window (max. 3 buttons)."
+msgstr ""
+"<strong>Respuesta Rápida (QUICK_REPLY):</strong> Envía una respuesta "
+"predefinida al hacer clic y reactiva la ventana de 24 horas (máx. 3 "
+"botones)."
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_template_form
+msgid ""
+"<strong>Website (URL):</strong> Opens a web page (max. 2 buttons). For "
+"dynamic URLs, configure the field path that will replace the path variable."
+msgstr ""
+"<strong>Sitio Web (URL):</strong> Abre una página web (máx. 2 botones). En "
+"URLs dinámicas, configure el campo o marcador dinámico que sustituirá la "
+"variable de ruta."
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/whatsapp_template_button.py:0
+msgid ""
+"A WhatsApp template cannot have more than 10 buttons in total per Meta "
+"specifications."
+msgstr ""
+"Una plantilla de WhatsApp no puede tener más de 10 botones en total según "
+"especificaciones de Meta."
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_res_config_settings__whatsapp_graph_api_token
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_account__graph_api_token
+msgid "Access Token (Bearer)"
+msgstr "Token de Acceso (Bearer)"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_account__name
+msgid "Account Name"
+msgstr "Nombre de la Cuenta"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_account__active
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template__active
+msgid "Active"
+msgstr "Activo"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.res_config_settings_view_form_inherit_whatsapp
+msgid "Active Account"
+msgstr "Cuenta Activa"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__account_account__whatsapp_health_state__active
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__account_analytic_account__whatsapp_health_state__active
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__account_journal__whatsapp_health_state__active
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__account_move__whatsapp_health_state__active
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__account_payment__whatsapp_health_state__active
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__account_reconcile_model__whatsapp_health_state__active
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__account_tax__whatsapp_health_state__active
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__crm_team__whatsapp_health_state__active
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__crm_team_member__whatsapp_health_state__active
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__discuss_channel__whatsapp_health_state__active
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__iap_account__whatsapp_health_state__active
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__ir_actions_server__whatsapp_health_state__active
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__ir_cron__whatsapp_health_state__active
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__mail_blacklist__whatsapp_health_state__active
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__mail_thread__whatsapp_health_state__active
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__mail_thread_blacklist__whatsapp_health_state__active
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__mail_thread_cc__whatsapp_health_state__active
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__mail_thread_main_attachment__whatsapp_health_state__active
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__mail_thread_phone__whatsapp_health_state__active
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__mail_tracking_duration_mixin__whatsapp_health_state__active
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__phone_blacklist__whatsapp_health_state__active
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__product_category__whatsapp_health_state__active
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__product_pricelist__whatsapp_health_state__active
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__product_product__whatsapp_health_state__active
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__product_template__whatsapp_health_state__active
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__res_company__whatsapp_health_state__active
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__res_partner__whatsapp_health_state__active
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__res_partner_bank__whatsapp_health_state__active
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__sale_order__whatsapp_health_state__active
+msgid "Active Window"
+msgstr "Ventana Activa"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/wizard/whatsapp_composer_wizard.py:0
+msgid "An error occurred while rendering the PDF report in memory."
+msgstr "Ocurrió un error al compilar el reporte PDF en memoria."
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_res_config_settings__whatsapp_app_secret
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_account__app_secret
+msgid "App Secret"
+msgstr "App Secret"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template__model_id
+msgid "Applicable Model"
+msgstr "Modelo Aplicable"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_message__partner_id
+msgid "Associated Contact"
+msgstr "Contacto Asociado"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_composer_wizard__attach_pdf
+msgid "Attach Official PDF"
+msgstr "Adjuntar PDF Oficial"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_message__attachment_id
+msgid "Attachment"
+msgstr "Adjunto"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__whatsapp_message__message_type__audio
+msgid "Audio"
+msgstr "Audio"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.res_config_settings_view_form_inherit_whatsapp
+msgid "Automatic Escalation and Collections"
+msgstr "Escalamiento Automático y Cobranza"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__whatsapp_message__message_type__button
+msgid "Button"
+msgstr "Botón"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template__button_count
+msgid "Button Count"
+msgstr "Número de Botones"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template_button__name
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_template_form
+msgid "Button Label"
+msgstr "Texto del Botón"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_composer_wizard__button_preview_html
+msgid "Button Preview"
+msgstr "Previsualización de Botones"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_composer_wizard__button_summary
+msgid "Button Summary"
+msgstr "Resumen de Botones"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template_button__button_type
+msgid "Button Type"
+msgstr "Tipo de Botón"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/whatsapp_template_button.py:0
+msgid ""
+"Button label '%(name)s' cannot exceed 25 characters (current length: "
+"%(length)d)."
+msgstr ""
+"La etiqueta del botón '%(name)s' no puede exceder 25 caracteres (longitud "
+"actual: %(length)d)."
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/whatsapp_template_button.py:0
+msgid "Button label is required."
+msgstr "La etiqueta del botón es requerida."
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template__button_ids
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_template_tree
+msgid "Buttons"
+msgstr "Botones"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/wizard/whatsapp_composer_wizard.py:0
+msgid "Buttons:"
+msgstr "Botones:"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_template_form
+msgid "Call Escalation"
+msgstr "Escalamiento a Llamada"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__whatsapp_template_button__button_type__phone_number
+msgid "Call Phone"
+msgstr "Llamar Teléfono"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_composer_wizard_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__account_account__whatsapp_health_state__cold
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__account_analytic_account__whatsapp_health_state__cold
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__account_journal__whatsapp_health_state__cold
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__account_move__whatsapp_health_state__cold
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__account_payment__whatsapp_health_state__cold
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__account_reconcile_model__whatsapp_health_state__cold
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__account_tax__whatsapp_health_state__cold
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__crm_team__whatsapp_health_state__cold
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__crm_team_member__whatsapp_health_state__cold
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__discuss_channel__whatsapp_health_state__cold
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__iap_account__whatsapp_health_state__cold
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__ir_actions_server__whatsapp_health_state__cold
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__ir_cron__whatsapp_health_state__cold
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__mail_blacklist__whatsapp_health_state__cold
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__mail_thread__whatsapp_health_state__cold
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__mail_thread_blacklist__whatsapp_health_state__cold
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__mail_thread_cc__whatsapp_health_state__cold
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__mail_thread_main_attachment__whatsapp_health_state__cold
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__mail_thread_phone__whatsapp_health_state__cold
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__mail_tracking_duration_mixin__whatsapp_health_state__cold
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__phone_blacklist__whatsapp_health_state__cold
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__product_category__whatsapp_health_state__cold
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__product_pricelist__whatsapp_health_state__cold
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__product_product__whatsapp_health_state__cold
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__product_template__whatsapp_health_state__cold
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__res_company__whatsapp_health_state__cold
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__res_partner__whatsapp_health_state__cold
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__res_partner_bank__whatsapp_health_state__cold
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__sale_order__whatsapp_health_state__cold
+msgid "Cold Thread"
+msgstr "Hilo Frío"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_whatsapp_template__variable_mapping
+msgid ""
+"Comma-separated list of model field paths to replace {{1}}, {{2}}, etc. "
+"Example: partner_id.name, name, amount_total"
+msgstr ""
+"Lista de campos del modelo separados por comas para sustituir {{1}}, {{2}}, "
+"etc. Ejemplo: partner_id.name, name, amount_total"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model,name:whatsapp_chatter_meta.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_account__company_id
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_composer_wizard__company_id
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_message__company_id
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template__company_id
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template_button__company_id
+msgid "Company"
+msgstr "Compañía"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_whatsapp_template_button__url_suffix_field
+msgid "Compatibility alias for url_field_path"
+msgstr "Alias de compatibilidad para url_field_path"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_whatsapp_composer_wizard__attach_pdf
+msgid ""
+"Compiles official document report in memory and sends it as WhatsApp "
+"attachment."
+msgstr ""
+"Compila el reporte oficial del documento en memoria y lo envía como adjunto "
+"de WhatsApp."
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_composer_wizard_form
+msgid "Compose your message or select a template to load dynamic content..."
+msgstr ""
+"Redacte su mensaje o seleccione una plantilla para cargar el contenido "
+"dinámico..."
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model,name:whatsapp_chatter_meta.model_res_config_settings
+msgid "Config Settings"
+msgstr "Ajustes de Configuración"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.ui.menu,name:whatsapp_chatter_meta.menu_whatsapp_configuration
+msgid "Configuration"
+msgstr "Configuración"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/whatsapp_account.py:0
+msgid "Connection Successful"
+msgstr "Conexión Exitosa"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.res_config_settings_view_form_inherit_whatsapp
+msgid "Connection parameters for Graph API"
+msgstr "Parámetros de conexión con la Graph API"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/whatsapp_account.py:0
+msgid "Connection to Meta Cloud API validated successfully. Phone: %s (%s)"
+msgstr "Conexión a Meta Cloud API validada exitosamente. Teléfono: %s (%s)"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_message_search
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_message__body
+msgid "Content"
+msgstr "Contenido"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/whatsapp_account.py:0
+msgid "Could not establish connection with Meta Graph API: %s"
+msgstr "No se pudo establecer conexión con Meta Graph API: %s"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.actions.act_window,help:whatsapp_chatter_meta.action_whatsapp_account
+msgid "Create your first WhatsApp Cloud API account linked to Meta."
+msgstr "Cree su primera cuenta de WhatsApp Cloud API vinculada a Meta."
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_account__create_uid
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_composer_wizard__create_uid
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_message__create_uid
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template__create_uid
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template_button__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_account__create_date
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_composer_wizard__create_date
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_message__create_date
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template__create_date
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template_button__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template_button__quick_reply_payload
+msgid "Custom Payload"
+msgstr "Payload Personalizado"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/whatsapp_template_button.py:0
+msgid ""
+"Custom payload for button '%(name)s' cannot exceed 128 characters (current "
+"length: %(length)d)."
+msgstr ""
+"El payload personalizado del botón '%(name)s' no puede superar 128 "
+"caracteres (longitud actual: %(length)d)."
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_message_search
+msgid "Date"
+msgstr "Fecha"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_message__date
+msgid "Date and Time"
+msgstr "Fecha y Hora"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_res_company__whatsapp_account_id
+msgid "Default WhatsApp Account"
+msgstr "Cuenta de WhatsApp Predeterminada"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.res_config_settings_view_form_inherit_whatsapp
+msgid ""
+"Defines the waiting hours after sending an unreplied outbound WhatsApp "
+"message before automatically creating a Call activity for the document "
+"responsible."
+msgstr ""
+"Define las horas de espera tras el envío de un mensaje de WhatsApp saliente "
+"no leído ni respondido antes de generar automáticamente una actividad de "
+"tipo 'Llamada telefónica' para el responsable del documento."
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__whatsapp_message__status__delivered
+msgid "Delivered"
+msgstr "Entregado"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_message_search
+msgid "Delivered/Read"
+msgstr "Entregados/Leídos"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_message_form
+msgid "Delivery Details"
+msgstr "Detalles de Entrega"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_message__status
+msgid "Delivery Status"
+msgstr "Estado de Entrega"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_message__direction
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_message_search
+msgid "Direction"
+msgstr "Dirección"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_account_move__display_name
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_mail_thread__display_name
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_res_company__display_name
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_sale_order__display_name
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_account__display_name
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_composer_wizard__display_name
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_message__display_name
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template__display_name
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template_button__display_name
+msgid "Display Name"
+msgstr "Nombre a Mostrar"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__whatsapp_message__message_type__document
+msgid "Document"
+msgstr "Documento"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_composer_wizard__res_id
+msgid "Document ID"
+msgstr "ID del Documento"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_composer_wizard__res_model
+msgid "Document Model"
+msgstr "Modelo del Documento"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__whatsapp_message__status__draft
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__whatsapp_template_button__url_type__dynamic
+msgid "Dynamic"
+msgstr "Dinámico"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template_button__url_field_path
+msgid "Dynamic Field (Optional)"
+msgstr "Campo Dinámico (Opcional)"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_template_form
+msgid "Dynamic Mapping and Escalation"
+msgstr "Mapeo Dinámico y Escalamiento"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template__variable_mapping
+msgid "Dynamic Variable Mapping"
+msgstr "Mapeo Dinámico de Variables"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model,name:whatsapp_chatter_meta.model_mail_thread
+msgid "Email Thread"
+msgstr "Hilo de Correo"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_template_form
+msgid ""
+"Enter comma-separated field paths to substitute variables {{1}}, {{2}}, "
+"{{3}} in sequential order."
+msgstr ""
+"Ingrese los campos separados por comas que reemplazarán las variables {{1}},"
+" {{2}}, {{3}} en orden secuencial."
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_message__error_code
+msgid "Error Code"
+msgstr "Código de Error"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_message__error_message
+msgid "Error Detail"
+msgstr "Detalle del Error"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/whatsapp_account.py:0
+msgid "Error downloading file from Meta CDN (Code %s)"
+msgstr "Error al descargar archivo desde Meta CDN (Código %s)"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_message__escalated
+msgid "Escalated to Activity"
+msgstr "Escalado a Actividad"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_template_tree
+msgid "Escalation (h)"
+msgstr "Escalamiento (h)"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_message__escalation_activity_id
+msgid "Escalation Activity"
+msgstr "Actividad de Escalamiento"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_res_config_settings__whatsapp_escalation_hours
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template__escalation_hours
+msgid "Escalation Threshold (hours)"
+msgstr "Umbral de Escalamiento (horas)"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_res_config_settings__whatsapp_escalation_threshold_hours
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template__escalation_threshold_hours
+msgid "Escalation Threshold in Hours"
+msgstr "Umbral de Escalamiento en Horas"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_whatsapp_template__name
+msgid ""
+"Exact template name approved in Meta Business Manager (lowercase letters and"
+" underscores)"
+msgstr ""
+"Nombre exacto de la plantilla aprobada en Meta Business Manager (letras "
+"minúsculas y guiones bajos)"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__account_account__whatsapp_health_state__expired
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__account_analytic_account__whatsapp_health_state__expired
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__account_journal__whatsapp_health_state__expired
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__account_move__whatsapp_health_state__expired
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__account_payment__whatsapp_health_state__expired
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__account_reconcile_model__whatsapp_health_state__expired
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__account_tax__whatsapp_health_state__expired
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__crm_team__whatsapp_health_state__expired
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__crm_team_member__whatsapp_health_state__expired
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__discuss_channel__whatsapp_health_state__expired
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__iap_account__whatsapp_health_state__expired
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__ir_actions_server__whatsapp_health_state__expired
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__ir_cron__whatsapp_health_state__expired
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__mail_blacklist__whatsapp_health_state__expired
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__mail_thread__whatsapp_health_state__expired
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__mail_thread_blacklist__whatsapp_health_state__expired
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__mail_thread_cc__whatsapp_health_state__expired
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__mail_thread_main_attachment__whatsapp_health_state__expired
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__mail_thread_phone__whatsapp_health_state__expired
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__mail_tracking_duration_mixin__whatsapp_health_state__expired
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__phone_blacklist__whatsapp_health_state__expired
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__product_category__whatsapp_health_state__expired
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__product_pricelist__whatsapp_health_state__expired
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__product_product__whatsapp_health_state__expired
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__product_template__whatsapp_health_state__expired
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__res_company__whatsapp_health_state__expired
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__res_partner__whatsapp_health_state__expired
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__res_partner_bank__whatsapp_health_state__expired
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__sale_order__whatsapp_health_state__expired
+msgid "Expired Window"
+msgstr "Ventana Expirada"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__whatsapp_message__status__failed
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_message_search
+msgid "Failed"
+msgstr "Fallido"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/whatsapp_account.py:0
+msgid "Failed to test connection with Meta (Code %s): %s"
+msgstr "Fallo al probar la conexión con Meta (Código %s): %s"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__whatsapp_composer_wizard__message_mode__freeform
+msgid "Freeform Message (24h Window)"
+msgstr "Mensaje Libre (Ventana 24h)"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_account__api_version
+msgid "Graph API Version"
+msgstr "Versión de Graph API"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_message__template_id
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__whatsapp_message__message_type__template
+msgid "HSM Template"
+msgstr "Plantilla HSM"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_composer_wizard__has_buttons
+msgid "Has Buttons"
+msgstr "Tiene Botones"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template__header_type
+msgid "Header Type"
+msgstr "Tipo de Cabecera"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/account_move.py:0
+msgid "Hello %s, we share invoice %s for a total of %s."
+msgstr "Hola %s, le compartimos la factura %s por un total de %s."
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/sale_order.py:0
+msgid "Hello %s, we share quotation %s for a total of %s."
+msgstr "Hola %s, le compartimos la cotización %s por un total de %s."
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_template_form
+msgid "Hello {{1}}, we share your document {{2}} for a total of {{3}}..."
+msgstr ""
+"Hola {{1}}, le enviamos su documento {{2}} por un monto total de {{3}}..."
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.actions.act_window,help:whatsapp_chatter_meta.action_whatsapp_message
+msgid ""
+"History and audit log of dispatched and received transactional WhatsApp "
+"messages."
+msgstr ""
+"Historial y bitácora de mensajes de WhatsApp transaccionales despachados y "
+"recibidos."
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_res_company__whatsapp_escalation_hours
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_res_company__whatsapp_escalation_threshold_hours
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_res_config_settings__whatsapp_escalation_hours
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_res_config_settings__whatsapp_escalation_threshold_hours
+msgid ""
+"Hours of inactivity or lack of response before escalating to call activity"
+msgstr ""
+"Horas de inactividad o falta de respuesta antes de escalar a actividad de "
+"llamada telefónica"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_account_move__id
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_mail_thread__id
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_res_company__id
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_res_config_settings__id
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_sale_order__id
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_account__id
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_composer_wizard__id
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_message__id
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template__id
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template_button__id
+msgid "ID"
+msgstr "ID"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_whatsapp_template__language
+msgid "ISO language code configured in Meta (e.g. es, en_US)"
+msgstr "Código de idioma ISO configurado en Meta (ej. es, en_US)"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__whatsapp_message__message_type__image
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__whatsapp_template__header_type__image
+msgid "Image"
+msgstr "Imagen"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.res_config_settings_view_form_inherit_whatsapp
+msgid "Inactivity Threshold for Call Escalation"
+msgstr "Umbral de Inactividad para Escalamiento a Llamada"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.res_config_settings_view_form_inherit_whatsapp
+msgid "Inactivity time:"
+msgstr "Tiempo de inactividad:"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__whatsapp_message__direction__inbound
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_message_search
+msgid "Inbound"
+msgstr "Entrante"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_whatsapp_composer_wizard__is_window_open
+msgid ""
+"Indicates whether the customer has interacted in the last 24 hours allowing "
+"freeform messages."
+msgstr ""
+"Indica si el cliente ha interactuado en las últimas 24 horas permitiendo "
+"mensajes libres."
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__whatsapp_message__message_type__interactive
+msgid "Interactive"
+msgstr "Interactivo"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_template_form
+msgid "Interactive Buttons"
+msgstr "Botones Interactivos"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/wizard/whatsapp_composer_wizard.py:0
+msgid ""
+"It is not possible to send a freeform message because the 24-hour customer "
+"service window is inactive. Meta requires the use of an approved Official "
+"Template (HSM)."
+msgstr ""
+"No es posible enviar un mensaje libre debido a que la ventana de servicio de"
+" 24 horas no está activa. Meta requiere el uso de una Plantilla Oficial "
+"aprobada (HSM)."
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model,name:whatsapp_chatter_meta.model_account_move
+msgid "Journal Entry"
+msgstr "Asiento Contable"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template__language
+msgid "Language Code"
+msgstr "Código de Idioma"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_account__write_uid
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_composer_wizard__write_uid
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_message__write_uid
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template__write_uid
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template_button__write_uid
+msgid "Last Updated by"
+msgstr "Última Actualización por"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_account__write_date
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_composer_wizard__write_date
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_message__write_date
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template__write_date
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template_button__write_date
+msgid "Last Updated on"
+msgstr "Última Actualización el"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_template_form
+msgid "Main Configuration"
+msgstr "Configuración Principal"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.res_config_settings_view_form_inherit_whatsapp
+msgid "Manage Accounts"
+msgstr "Administrar Cuentas"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/controllers/webhook.py:0
+msgid ""
+"Media file (%s) could not be downloaded automatically (ID: <code>%s</code>):"
+" %s"
+msgstr ""
+"Archivo multimedia (%s) no pudo descargarse automáticamente (ID: "
+"<code>%s</code>): %s"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/controllers/webhook.py:0
+msgid "Media file downloaded and attached automatically."
+msgstr "Archivo multimedia descargado y adjuntado automáticamente."
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_composer_wizard__body
+msgid "Message / Preview"
+msgstr "Mensaje / Previsualización"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_template_form
+msgid "Message Body"
+msgstr "Cuerpo del Mensaje"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template__body
+msgid "Message Body (with {{1}}, {{2}} placeholders)"
+msgstr "Cuerpo del Mensaje (con marcadores {{1}}, {{2}})"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_composer_wizard_form
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_message_form
+msgid "Message Content"
+msgstr "Contenido del Mensaje"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.actions.act_window,name:whatsapp_chatter_meta.action_whatsapp_message
+#: model:ir.ui.menu,name:whatsapp_chatter_meta.menu_whatsapp_messages
+msgid "Message Logs"
+msgstr "Bitácora de Mensajes"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_message__message_type
+msgid "Message Type"
+msgstr "Tipo de Mensaje"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_whatsapp_composer_wizard__body
+msgid "Message content to send or preview with dynamic variables replaced."
+msgstr ""
+"Contenido del mensaje a enviar o previsualizar con las variables dinámicas "
+"reemplazadas."
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/wizard/whatsapp_composer_wizard.py:0
+msgid "Message sent via WhatsApp (%s):"
+msgstr "Mensaje enviado por WhatsApp (%s):"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_res_company__whatsapp_account_id
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_res_config_settings__whatsapp_account_id
+msgid "Meta Cloud API WhatsApp account configured for this company"
+msgstr "Cuenta de WhatsApp Meta Cloud API configurada para esta compañía"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.res_config_settings_view_form_inherit_whatsapp
+msgid "Meta Credentials"
+msgstr "Credenciales de Meta"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_whatsapp_account__api_version
+msgid "Meta Graph API version (e.g. v21.0)"
+msgstr "Versión de Meta Graph API (ej. v21.0)"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_account_form
+msgid "Meta Identifiers"
+msgstr "Identificadores de Meta"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_message__media_id
+msgid "Meta Media ID"
+msgstr "ID de Multimedia en Meta"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_template_form
+msgid "Meta Template Name"
+msgstr "Nombre de la Plantilla en Meta"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model,name:whatsapp_chatter_meta.model_whatsapp_template_button
+msgid "Meta WhatsApp Template Button"
+msgstr "Botón de Plantilla de WhatsApp Meta"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_res_config_settings__whatsapp_app_secret
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_whatsapp_account__app_secret
+msgid "Meta application secret to validate webhook HMAC-SHA256 signature"
+msgstr "App Secret de Meta para validar la firma HMAC-SHA256 del Webhook"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/whatsapp_account.py:0
+msgid "Meta did not return a download URL for media_id %s"
+msgstr "Meta no devolvió una URL de descarga para el media_id %s"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/whatsapp_account.py:0
+msgid "Meta did not return a valid media ID: %s"
+msgstr "Meta no devolvió un ID de multimedia válido: %s"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/whatsapp_account.py:0
+msgid "Meta error retrieving media URL (%s): %s"
+msgstr "Error de Meta al obtener la URL del archivo (%s): %s"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/whatsapp_account.py:0
+msgid "Meta error sending message (%s): %s"
+msgstr "Error de Meta al enviar mensaje (%s): %s"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/whatsapp_account.py:0
+msgid "Meta error uploading file (%s): %s"
+msgstr "Error de Meta al subir archivo (%s): %s"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_whatsapp_template_button__url_field_path
+msgid "Model field path to evaluate as suffix (e.g. name, access_token, id)"
+msgstr ""
+"Ruta del campo del modelo a evaluar como sufijo (ej. name, access_token, id)"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/whatsapp_account.py:0
+msgid "Network error downloading file from Meta: %s"
+msgstr "Error de red al descargar archivo de Meta: %s"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/whatsapp_account.py:0
+msgid "Network error querying media file on WhatsApp: %s"
+msgstr "Error de red al consultar archivo multimedia en WhatsApp: %s"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/whatsapp_account.py:0
+msgid "Network error sending WhatsApp message: %s"
+msgstr "Error de red al enviar mensaje de WhatsApp: %s"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/whatsapp_account.py:0
+msgid "Network error uploading file to WhatsApp: %s"
+msgstr "Error de red al subir archivo a WhatsApp: %s"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__account_account__whatsapp_health_state__none
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__account_analytic_account__whatsapp_health_state__none
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__account_journal__whatsapp_health_state__none
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__account_move__whatsapp_health_state__none
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__account_payment__whatsapp_health_state__none
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__account_reconcile_model__whatsapp_health_state__none
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__account_tax__whatsapp_health_state__none
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__crm_team__whatsapp_health_state__none
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__crm_team_member__whatsapp_health_state__none
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__discuss_channel__whatsapp_health_state__none
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__iap_account__whatsapp_health_state__none
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__ir_actions_server__whatsapp_health_state__none
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__ir_cron__whatsapp_health_state__none
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__mail_blacklist__whatsapp_health_state__none
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__mail_thread__whatsapp_health_state__none
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__mail_thread_blacklist__whatsapp_health_state__none
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__mail_thread_cc__whatsapp_health_state__none
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__mail_thread_main_attachment__whatsapp_health_state__none
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__mail_thread_phone__whatsapp_health_state__none
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__mail_tracking_duration_mixin__whatsapp_health_state__none
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__phone_blacklist__whatsapp_health_state__none
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__product_category__whatsapp_health_state__none
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__product_pricelist__whatsapp_health_state__none
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__product_product__whatsapp_health_state__none
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__product_template__whatsapp_health_state__none
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__res_company__whatsapp_health_state__none
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__res_partner__whatsapp_health_state__none
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__res_partner_bank__whatsapp_health_state__none
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__sale_order__whatsapp_health_state__none
+msgid "No Conversation"
+msgstr "Sin Conversación"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__whatsapp_template__header_type__none
+msgid "No Header"
+msgstr "Sin Cabecera"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/whatsapp_account.py:0
+msgid "No active WhatsApp account configured for company %s."
+msgstr "No hay una cuenta activa de WhatsApp configurada para la compañía %s."
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/wizard/whatsapp_composer_wizard.py:0
+msgid "No report action found configured to render the PDF."
+msgstr ""
+"No se encontró una acción de reporte configurada para compilar el PDF."
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_whatsapp_template__model_id
+msgid "Odoo model this template applies to (e.g. sale.order, account.move)"
+msgstr ""
+"Modelo de Odoo al que aplica esta plantilla (ej. sale.order, account.move)"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__whatsapp_composer_wizard__message_mode__template
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_template_form
+msgid "Official Meta Template (HSM)"
+msgstr "Plantilla Oficial Meta (HSM)"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model,name:whatsapp_chatter_meta.model_whatsapp_template
+msgid "Official Meta WhatsApp Template (HSM)"
+msgstr "Plantilla Oficial de WhatsApp Meta (HSM)"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_composer_wizard_form
+msgid "Official PDF Attachment"
+msgstr "Adjunto PDF Oficial"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.actions.act_window,name:whatsapp_chatter_meta.action_whatsapp_template
+#: model:ir.ui.menu,name:whatsapp_chatter_meta.menu_whatsapp_templates
+msgid "Official Templates (HSM)"
+msgstr "Plantillas Oficiales (HSM)"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/whatsapp_template_button.py:0
+msgid ""
+"Only a maximum of 1 'Call Phone' (PHONE_NUMBER) button is allowed per "
+"template."
+msgstr ""
+"Solo se permite un máximo de 1 botón de 'Llamar Teléfono' (PHONE_NUMBER) por"
+" plantilla."
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/whatsapp_template_button.py:0
+msgid "Only a maximum of 2 'URL' buttons are allowed per template."
+msgstr ""
+"Solo se permite un máximo de 2 botones de 'Sitio Web' (URL) por plantilla."
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__whatsapp_message__message_type__other
+msgid "Other"
+msgstr "Otro"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__whatsapp_message__direction__outbound
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_message_search
+msgid "Outbound"
+msgstr "Saliente"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__whatsapp_template__header_type__document
+msgid "PDF Document"
+msgstr "Documento PDF"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_composer_wizard__pdf_filename
+msgid "PDF Filename"
+msgstr "Nombre de Archivo PDF"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_composer_wizard__report_action_id
+msgid "PDF Report"
+msgstr "Reporte PDF"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_message_form
+msgid "Parties and Document"
+msgstr "Interlocutores y Documento"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_whatsapp_template_button__quick_reply_payload
+msgid "Payload for quick_reply in Meta Cloud API"
+msgstr "Payload para respuesta rápida en Meta Cloud API"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_res_config_settings__whatsapp_graph_api_token
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_whatsapp_account__graph_api_token
+msgid ""
+"Permanent or system user access token generated in Meta Business Manager"
+msgstr ""
+"Token de acceso permanente o de usuario del sistema generado en Meta "
+"Business Manager"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_composer_wizard__phone
+msgid "Phone (E.164)"
+msgstr "Teléfono (E.164)"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template_button__phone_number
+msgid "Phone Number"
+msgstr "Número de Teléfono"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_res_config_settings__whatsapp_phone_number_id
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_account__phone_number_id
+msgid "Phone Number ID"
+msgstr "ID del Número de Teléfono"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_res_config_settings__whatsapp_phone_number_id
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_whatsapp_account__phone_number_id
+msgid "Phone number ID provided by Meta WhatsApp Cloud API"
+msgstr "ID del número de teléfono provisto por Meta WhatsApp Cloud API"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_whatsapp_template_button__phone_number
+msgid "Phone number with country code (e.g. +16505551234)"
+msgstr "Número telefónico con código de país (ej. +16505551234)"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__whatsapp_template_button__button_type__quick_reply
+msgid "Quick Reply"
+msgstr "Respuesta Rápida"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_message__raw_payload
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_message_form
+msgid "Raw JSON Payload"
+msgstr "Payload JSON Crudo"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__whatsapp_message__status__read
+msgid "Read"
+msgstr "Leído"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/controllers/webhook.py:0
+msgid "Reason:"
+msgstr "Motivo:"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__whatsapp_message__status__received
+msgid "Received"
+msgstr "Recibido"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_composer_wizard__partner_id
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_message__recipient
+msgid "Recipient"
+msgstr "Destinatario"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_whatsapp_composer_wizard__phone
+msgid ""
+"Recipient phone number in international E.164 format (e.g. +16505551234)"
+msgstr ""
+"Número de teléfono del destinatario en formato internacional E.164 (ej. "
+"+16505551234)"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_message__res_id
+msgid "Record ID"
+msgstr "ID del Registro"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_message__name
+msgid "Reference"
+msgstr "Referencia"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.actions.act_window,help:whatsapp_chatter_meta.action_whatsapp_template
+msgid ""
+"Register approved Meta HSM templates to initiate conversations outside the "
+"24-hour window."
+msgstr ""
+"Registre las plantillas HSM aprobadas en Meta para iniciar conversaciones "
+"fuera de la ventana de 24 horas."
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_message__res_model
+msgid "Related Model"
+msgstr "Modelo Relacionado"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/controllers/webhook.py:0
+msgid "Response received via WhatsApp (%s - %s):"
+msgstr "Respuesta recibida por WhatsApp (%s - %s):"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model,name:whatsapp_chatter_meta.model_sale_order
+msgid "Sales Order"
+msgstr "Pedido de Venta"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_message_search
+msgid "Search WhatsApp Messages"
+msgstr "Buscar Mensajes de WhatsApp"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_account_form
+msgid "Security and Credentials"
+msgstr "Seguridad y Credenciales"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.res_config_settings_view_form_inherit_whatsapp
+msgid ""
+"Select or configure the Meta WhatsApp Cloud API account for this company"
+msgstr ""
+"Seleccione o configure la cuenta de Meta WhatsApp Cloud API para esta "
+"compañía"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/account_move.py:0
+msgid "Send Invoice via WhatsApp"
+msgstr "Enviar Factura por WhatsApp"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_composer_wizard__message_mode
+msgid "Send Mode"
+msgstr "Modo de Envío"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/sale_order.py:0
+msgid "Send Quotation via WhatsApp"
+msgstr "Enviar Cotización por WhatsApp"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_composer_wizard_form
+msgid "Send WhatsApp Message"
+msgstr "Enviar Mensaje por WhatsApp"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/mail_thread.py:0
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_move_form_inherit_whatsapp
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_order_form_inherit_whatsapp
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_composer_wizard_form
+msgid "Send via WhatsApp"
+msgstr "Enviar por WhatsApp"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_message__sender
+msgid "Sender"
+msgstr "Remitente"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__whatsapp_message__status__sent
+msgid "Sent"
+msgstr "Enviado"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template_button__sequence
+msgid "Sequence"
+msgstr "Secuencia"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__whatsapp_template_button__url_type__static
+msgid "Static"
+msgstr "Estático"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_message_search
+msgid "Status"
+msgstr "Estado"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_whatsapp_template_button__url
+msgid ""
+"Target URL. For dynamic URLs, may include {{1}} or {{field}} placeholder"
+msgstr ""
+"URL de destino. Para URLs dinámicas, puede incluir el marcador {{1}} o "
+"{{campo}}"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template__model
+msgid "Technical Model Name"
+msgstr "Nombre Técnico del Modelo"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template_button__template_id
+msgid "Template"
+msgstr "Plantilla"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_template_form
+msgid "Template Buttons"
+msgstr "Botones de la Plantilla"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template__name
+msgid "Template Name in Meta"
+msgstr "Nombre de la Plantilla en Meta"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_whatsapp_template__body
+msgid ""
+"Template content with numbered placeholders. Example: Hello {{1}}, we attach"
+" your quotation {{2}} for a total of {{3}}."
+msgstr ""
+"Contenido de la plantilla con marcadores numerados. Ejemplo: Hola {{1}}, le "
+"adjuntamos su cotización {{2}} por un total de {{3}}."
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/whatsapp_template.py:0
+msgid "Template escalation threshold cannot be negative."
+msgstr "El umbral de escalamiento de la plantilla no puede ser negativo."
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/whatsapp_template_button.py:0
+msgid ""
+"Templates combining call or URL buttons only allow up to 3 quick reply "
+"buttons."
+msgstr ""
+"Las plantillas que combinan botones de llamada o URL solo permiten hasta 3 "
+"botones de respuesta rápida."
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.res_config_settings_view_form_inherit_whatsapp
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_account_form
+msgid "Test Connection"
+msgstr "Probar Conexión"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__whatsapp_message__message_type__text
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__whatsapp_template__header_type__text
+msgid "Text"
+msgstr "Texto"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/wizard/whatsapp_composer_wizard.py:0
+msgid ""
+"The 24-hour service window is not active. You must select an Official Meta "
+"Template (HSM) to start the conversation."
+msgstr ""
+"La ventana de servicio de 24 horas no está activa. Debe seleccionar una "
+"Plantilla Oficial de Meta (HSM) para iniciar la conversación."
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/wizard/whatsapp_composer_wizard.py:0
+msgid "The associated record does not exist."
+msgstr "El registro asociado no existe."
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/wizard/whatsapp_composer_wizard.py:0
+msgid "The document model (%s) is not valid."
+msgstr "El modelo de documento (%s) no es válido."
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/res_company.py:0
+msgid "The escalation threshold must be greater than 0 hours."
+msgstr "El umbral de escalamiento debe ser mayor a 0 horas."
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/wizard/whatsapp_composer_wizard.py:0
+msgid "The message and attachments were successfully sent to %s."
+msgstr "El mensaje y los adjuntos fueron enviados exitosamente a %s."
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/controllers/webhook.py:0
+msgid "The message sent to <strong>%s</strong> could not be delivered."
+msgstr "El mensaje enviado a <strong>%s</strong> no pudo ser entregado."
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/wizard/whatsapp_composer_wizard.py:0
+msgid "The phone number provided (%s) is not valid for WhatsApp."
+msgstr "El número telefónico provisto (%s) no es válido para WhatsApp."
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/wizard/whatsapp_composer_wizard.py:0
+msgid ""
+"To attach a PDF outside the 24-hour window, the selected official template "
+"must have a Document (PDF) header configured. Meta does not allow standalone"
+" media messages outside the customer service window."
+msgstr ""
+"Para adjuntar un PDF fuera de la ventana de 24 horas, la plantilla oficial "
+"seleccionada debe tener una cabecera configurada de tipo Documento (PDF). "
+"Meta no permite mensajes de archivos multimedia independientes fuera de la "
+"ventana de atención al cliente."
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template_button__url_suffix_field
+msgid "URL Suffix (Alias)"
+msgstr "Sufijo de URL (Alias)"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template_button__url_type
+msgid "URL Type"
+msgstr "Tipo de URL"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/whatsapp_message.py:0
+msgid "Unanswered WhatsApp: Collection Management"
+msgstr "WhatsApp no respondido: Gestión de Cobranza"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/whatsapp_message.py:0
+msgid "Unanswered WhatsApp: Commercial Follow-up"
+msgstr "WhatsApp no respondido: Seguimiento Comercial"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/whatsapp_account.py:0
+msgid "Unexpected response from Meta sending message: %s"
+msgstr "Respuesta inesperada de Meta al enviar mensaje: %s"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_whatsapp_message__wamid
+msgid "Unique message identifier issued or received by Meta"
+msgstr "Identificador único del mensaje emitido o recibido por Meta"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_res_config_settings__whatsapp_webhook_verify_token
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_whatsapp_account__webhook_verify_token
+msgid "Verification token used in Meta Webhook GET handshake"
+msgstr ""
+"Token de verificación utilizado en el handshake GET del Webhook de Meta"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__whatsapp_message__message_type__video
+msgid "Video"
+msgstr "Video"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields.selection,name:whatsapp_chatter_meta.selection__whatsapp_template_button__button_type__url
+msgid "Visit Website"
+msgstr "Visitar Sitio Web"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_res_config_settings__whatsapp_waba_id
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_account__waba_id
+msgid "WABA ID"
+msgstr "WABA ID"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_account_form
+msgid "Webhook Instructions"
+msgstr "Instrucciones del Webhook"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_res_config_settings__whatsapp_webhook_verify_token
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_account__webhook_verify_token
+msgid "Webhook Verify Token"
+msgstr "Webhook Verify Token"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template_button__url
+msgid "Website URL"
+msgstr "URL del Sitio Web"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.ui.menu,name:whatsapp_chatter_meta.menu_whatsapp_root
+msgid "WhatsApp"
+msgstr "WhatsApp"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_res_config_settings__whatsapp_account_id
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_composer_wizard__account_id
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_message__account_id
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_template__account_id
+msgid "WhatsApp Account"
+msgstr "Cuenta de WhatsApp"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.actions.act_window,name:whatsapp_chatter_meta.action_whatsapp_account
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_account_tree
+msgid "WhatsApp Accounts"
+msgstr "Cuentas de WhatsApp"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model,name:whatsapp_chatter_meta.model_whatsapp_account
+msgid "WhatsApp Business Account (Meta Cloud API)"
+msgstr "Cuenta de WhatsApp Business (Meta Cloud API)"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_res_config_settings__whatsapp_waba_id
+#: model:ir.model.fields,help:whatsapp_chatter_meta.field_whatsapp_account__waba_id
+msgid "WhatsApp Business Account ID"
+msgstr "ID de la Cuenta de WhatsApp Business"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_account_form
+msgid "WhatsApp Cloud API Account"
+msgstr "Cuenta de WhatsApp Cloud API"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.ui.menu,name:whatsapp_chatter_meta.menu_whatsapp_accounts
+msgid "WhatsApp Cloud API Accounts"
+msgstr "Cuentas WhatsApp Cloud API"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.res_config_settings_view_form_inherit_whatsapp
+msgid "WhatsApp Cloud API Integration"
+msgstr "Integración WhatsApp Cloud API"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model,name:whatsapp_chatter_meta.model_whatsapp_composer_wizard
+msgid "WhatsApp Composer Wizard (Meta Cloud API)"
+msgstr "Asistente de Envío de WhatsApp (Meta Cloud API)"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/wizard/whatsapp_composer_wizard.py:0
+msgid "WhatsApp Dispatched"
+msgstr "WhatsApp Despachado"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_res_company__whatsapp_escalation_hours
+msgid "WhatsApp Escalation Threshold (hours)"
+msgstr "Umbral de Escalamiento de WhatsApp (horas)"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_res_company__whatsapp_escalation_threshold_hours
+msgid "WhatsApp Escalation Threshold in Hours"
+msgstr "Umbral de Escalamiento de WhatsApp en Horas"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_message_form
+msgid "WhatsApp Message Audit"
+msgstr "Auditoría de Mensaje de WhatsApp"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_message__wamid
+msgid "WhatsApp Message ID (wamid)"
+msgstr "ID del Mensaje de WhatsApp (wamid)"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model,name:whatsapp_chatter_meta.model_whatsapp_message
+msgid "WhatsApp Message Log (Meta Cloud API)"
+msgstr "Bitácora de Mensajes de WhatsApp (Meta Cloud API)"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_message_tree
+msgid "WhatsApp Message Logs"
+msgstr "Bitácora de Mensajes"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.res_config_settings_view_form_inherit_whatsapp
+msgid "WhatsApp Meta"
+msgstr "WhatsApp Meta"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_account_account__whatsapp_health_state
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_account_analytic_account__whatsapp_health_state
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_account_bank_statement_line__whatsapp_health_state
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_account_journal__whatsapp_health_state
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_account_move__whatsapp_health_state
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_account_payment__whatsapp_health_state
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_account_reconcile_model__whatsapp_health_state
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_account_setup_bank_manual_config__whatsapp_health_state
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_account_tax__whatsapp_health_state
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_crm_team__whatsapp_health_state
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_crm_team_member__whatsapp_health_state
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_discuss_channel__whatsapp_health_state
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_iap_account__whatsapp_health_state
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_ir_actions_server__whatsapp_health_state
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_ir_cron__whatsapp_health_state
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_mail_blacklist__whatsapp_health_state
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_mail_thread__whatsapp_health_state
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_mail_thread_blacklist__whatsapp_health_state
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_mail_thread_cc__whatsapp_health_state
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_mail_thread_main_attachment__whatsapp_health_state
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_mail_thread_phone__whatsapp_health_state
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_mail_tracking_duration_mixin__whatsapp_health_state
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_phone_blacklist__whatsapp_health_state
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_product_category__whatsapp_health_state
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_product_pricelist__whatsapp_health_state
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_product_product__whatsapp_health_state
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_product_template__whatsapp_health_state
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_res_company__whatsapp_health_state
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_res_partner__whatsapp_health_state
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_res_partner_bank__whatsapp_health_state
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_res_users__whatsapp_health_state
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_sale_order__whatsapp_health_state
+msgid "WhatsApp Status"
+msgstr "Estado de WhatsApp"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_composer_wizard__template_id
+msgid "WhatsApp Template"
+msgstr "Plantilla de WhatsApp"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_template_tree
+msgid "WhatsApp Templates (HSM)"
+msgstr "Plantillas de WhatsApp (HSM)"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/controllers/webhook.py:0
+msgid "WhatsApp delivery failure:"
+msgstr "Fallo en la entrega del mensaje de WhatsApp:"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.actions.server,name:whatsapp_chatter_meta.ir_cron_whatsapp_escalate_unanswered_ir_actions_server
+msgid "WhatsApp: Escalar Mensajes No Respondidos"
+msgstr "WhatsApp: Escalar Mensajes No Respondidos"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/whatsapp_account.py:0
+msgid "You must configure Phone Number ID and Access Token."
+msgstr "Debe configurar el Phone Number ID y el Access Token."
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/wizard/whatsapp_composer_wizard.py:0
+msgid "You must select an official template to continue."
+msgstr "Debe seleccionar una plantilla oficial para continuar."
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/res_config_settings.py:0
+msgid "You must select or configure a WhatsApp account first."
+msgstr "Debe seleccionar o configurar una cuenta de WhatsApp primero."
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/whatsapp_template_button.py:0
+msgid "You must specify a phone number for button '%s'."
+msgstr "Debe especificar un número telefónico para el botón '%s'."
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/whatsapp_template_button.py:0
+msgid "You must specify a website URL for button '%s'."
+msgstr "Debe especificar una URL de sitio web para el botón '%s'."
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_template_form
+msgid "e.g. +16505551234"
+msgstr "ej. +16505551234"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_account_form
+msgid "e.g. 104589214785236"
+msgstr "ej. 104589214785236"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_account_form
+msgid "e.g. 195487215487965"
+msgstr "ej. 195487215487965"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_template_form
+msgid "e.g. CONFIRM_PAYMENT"
+msgstr "ej. CONFIRMAR_PAGO"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_account_form
+msgid "e.g. Main WhatsApp - Sales"
+msgstr "ej. WhatsApp Principal - Ventas"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_template_form
+msgid "e.g. https://company.com/pay/{{1}}"
+msgstr "ej. https://empresa.com/pay/{{1}}"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_template_form
+msgid "e.g. name"
+msgstr "ej. name"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_template_form
+msgid "e.g. send_quotation_v1"
+msgstr "ej. envio_cotizacion_v1"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_template_form
+msgid "partner_id.name, name, amount_total"
+msgstr "partner_id.name, name, amount_total"

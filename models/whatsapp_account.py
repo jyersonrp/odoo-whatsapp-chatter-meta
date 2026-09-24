@@ -133,11 +133,7 @@ class WhatsAppAccount(models.Model):
         except (ValueError, KeyError, TypeError):
             err_msg = response.text
             err_code = response.status_code
-        _logger.warning(
-            "Failed to test WhatsApp connection (%s): %s",
-            err_code,
-            err_msg,
-        )
+        _logger.warning("Failed to test WhatsApp connection (code: %s).", err_code)
         raise UserError(
             _(
                 "Failed to test connection with Meta (Code %s): %s",
@@ -207,11 +203,7 @@ class WhatsAppAccount(models.Model):
                 raise UserError(
                     _("Meta did not return a valid media ID: %s", response.text),
                 )
-            _logger.info(
-                "File %s successfully uploaded to Meta with media_id: %s",
-                filename,
-                media_id,
-            )
+            _logger.info("Media file successfully uploaded to Meta (filename: %s).", filename)
             return media_id
         try:
             err_data = response.json().get("error", {})
@@ -221,9 +213,9 @@ class WhatsAppAccount(models.Model):
             err_msg = response.text
             err_code = response.status_code
         _logger.error(
-            "Meta error uploading media file (%s): %s",
+            "Meta error uploading media file (HTTP status: %s, code: %s).",
+            response.status_code,
             err_code,
-            err_msg,
         )
         raise UserError(_("Meta error uploading file (%s): %s", err_code, err_msg))
 
@@ -257,7 +249,11 @@ class WhatsAppAccount(models.Model):
         except (ValueError, KeyError, TypeError):
             err_msg = response.text
             err_code = response.status_code
-        _logger.error("Meta error sending message (%s): %s", err_code, err_msg)
+        _logger.error(
+            "Meta error sending message (HTTP status: %s, code: %s).",
+            response.status_code,
+            err_code,
+        )
         raise UserError(
             _("Meta error sending message (%s): %s", err_code, err_msg),
         )
@@ -275,11 +271,7 @@ class WhatsAppAccount(models.Model):
         try:
             response = requests.get(url, headers=headers, timeout=20)
         except requests.RequestException as e:
-            _logger.error(
-                "Network error querying media URL on Meta (%s): %s",
-                media_id,
-                e,
-            )
+            _logger.error("Network error querying media URL on Meta: %s", e)
             raise UserError(
                 _(
                     "Network error querying media file on WhatsApp: %s",
@@ -307,9 +299,9 @@ class WhatsAppAccount(models.Model):
             err_msg = response.text
             err_code = response.status_code
         _logger.error(
-            "Meta error retrieving media URL (%s): %s",
+            "Meta error retrieving media URL (HTTP status: %s, code: %s).",
+            response.status_code,
             err_code,
-            err_msg,
         )
         raise UserError(
             _(
@@ -343,11 +335,7 @@ class WhatsAppAccount(models.Model):
         try:
             response = requests.get(download_url, headers=headers, timeout=30)
         except requests.RequestException as e:
-            _logger.error(
-                "Network error downloading binary from Meta CDN (%s): %s",
-                media_id,
-                e,
-            )
+            _logger.error("Network error downloading binary from Meta CDN: %s", e)
             raise UserError(
                 _("Network error downloading file from Meta: %s", str(e)),
             )

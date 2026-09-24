@@ -62,9 +62,8 @@ class WhatsAppWebhookController(http.Controller):
                 return Response(str(challenge), status=200, content_type="text/plain")
 
         _logger.warning(
-            "WhatsApp handshake failed. mode: %s, provided token: %s",
+            "WhatsApp handshake failed: invalid verification token or mode (%s).",
             mode,
-            token,
         )
         return Response("Forbidden", status=403, content_type="text/plain")
 
@@ -309,8 +308,7 @@ class WhatsAppWebhookController(http.Controller):
                         )
                     except Exception as e:  # noqa: BLE001
                         _logger.warning(
-                            "Failed to download WhatsApp media (%s): %s",
-                            media_id,
+                            "Failed to download WhatsApp media: %s",
                             e,
                         )
                         download_error = str(e)

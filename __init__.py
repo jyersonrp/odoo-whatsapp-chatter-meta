@@ -14,4 +14,11 @@ if sys.platform.startswith("win"):
         ):
             os.environ["PATH"] = standard_path + os.pathsep + os.environ.get("PATH", "")
 
+    try:
+        from odoo.addons.base.models.ir_actions_report import _wkhtml
+
+        _wkhtml.cache_clear()
+    except Exception:  # noqa: BLE001
+        pass
+
 from . import controllers, models, wizard

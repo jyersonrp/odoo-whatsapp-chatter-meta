@@ -163,23 +163,27 @@ class WhatsAppComposerWizard(models.TransientModel):
                 filename = f"{filename}.pdf"
 
             file_size_display = _("PDF Ready")
-            try:
-                pdf_content, _report_ext = (
-                    wizard.env["ir.actions.report"]
-                    .with_context(report_pdf_no_attachment=True)
-                    ._render_qweb_pdf(report.id, [record.id])
+            existing_attachment = (
+                wizard.env["ir.attachment"]
+                .sudo()
+                .search(
+                    [
+                        ("res_model", "=", wizard.res_model),
+                        ("res_id", "=", wizard.res_id),
+                        ("mimetype", "=", "application/pdf"),
+                    ],
+                    order="id desc",
+                    limit=1,
                 )
-                if pdf_content:
-                    size_bytes = len(pdf_content)
-                    if size_bytes < 1024:
-                        file_size_display = f"{size_bytes} B"
-                    elif size_bytes < 1024 * 1024:
-                        file_size_display = f"{size_bytes / 1024:.1f} KB"
-                    else:
-                        file_size_display = f"{size_bytes / (1024 * 1024):.1f} MB"
-            except Exception as e:  # noqa: BLE001
-                _logger.debug("PDF preview in-memory render estimation: %s", e)
-                file_size_display = _("Ready to generate")
+            )
+            if existing_attachment and existing_attachment.file_size:
+                size_bytes = existing_attachment.file_size
+                if size_bytes < 1024:
+                    file_size_display = f"{size_bytes} B"
+                elif size_bytes < 1024 * 1024:
+                    file_size_display = f"{size_bytes / 1024:.1f} KB"
+                else:
+                    file_size_display = f"{size_bytes / (1024 * 1024):.1f} MB"
 
             wizard.pdf_file_size = file_size_display
 
@@ -213,6 +217,7 @@ class WhatsAppComposerWizard(models.TransientModel):
                 else:
                     badge_html = '<span class="badge bg-secondary text-white p-2">PRESUPUESTO / QUOTATION</span>'
 
+            preview_url = f"/report/html/{html_escape(report.report_name)}/{record.id}"
             fullscreen_url = f"/report/pdf/{html_escape(report.report_name)}/{record.id}"
             report_display_name = html_escape(report.name or "")
             clean_filename = html_escape(filename)
@@ -235,7 +240,7 @@ class WhatsAppComposerWizard(models.TransientModel):
                 f'    </div>'
                 f'  </div>'
                 f'  <div class="rounded border overflow-hidden bg-white" style="height: 380px;">'
-                f'    <iframe src="{fullscreen_url}#toolbar=0&navpanes=0" style="width: 100%; height: 100%; border: none;" title="PDF Preview"></iframe>'
+                f'    <iframe src="{preview_url}" style="width: 100%; height: 100%; border: none;" title="PDF Preview" loading="lazy"></iframe>'
                 f'  </div>'
                 f'</div>'
             )

@@ -240,10 +240,11 @@
                 </table>
 
                 <!-- Footer note -->
-                <div style="border-top: 1px solid #dee2e6; padding-top: 12px; text-align: center; font-size: 10px; color: #adb5bd;">
-                    <span>Documento comercial optimizado para visualización vía WhatsApp | </span>
+                <div t-if="o.company_id.website or o.company_id.email" style="border-top: 1px solid #dee2e6; padding-top: 12px; text-align: center; font-size: 10px; color: #6c757d;">
                     <span t-field="o.company_id.name"/>
-                    <span t-if="o.company_id.website"> | <span t-field="o.company_id.website"/></span>
+                    <span t-if="o.company_id.phone"> • <span t-field="o.company_id.phone"/></span>
+                    <span t-if="o.company_id.email"> • <span t-field="o.company_id.email"/></span>
+                    <span t-if="o.company_id.website"> • <span t-field="o.company_id.website"/></span>
                 </div>
             </div>
         </t>

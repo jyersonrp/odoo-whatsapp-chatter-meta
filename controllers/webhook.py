@@ -203,6 +203,7 @@ class WhatsAppWebhookController(http.Controller):
 
             # Extract text content
             body_text = ""
+            caption = ""
             if msg_type == "text":
                 body_text = msg.get("text", {}).get("body", "")
             elif msg_type == "button":
@@ -377,6 +378,7 @@ class WhatsAppWebhookController(http.Controller):
                     "direction": "inbound",
                     "message_type": stored_type,
                     "body": body_text,
+                    "caption": caption or False,
                     "res_model": target_record._name if target_record else False,
                     "res_id": target_record.id if target_record else False,
                     "partner_id": partner.id if partner else False,

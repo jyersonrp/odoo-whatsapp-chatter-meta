@@ -87,6 +87,159 @@ class WhatsAppComposerWizard(models.TransientModel):
         string="PDF Filename",
         default="document.pdf",
     )
+    caption = fields.Char(
+        string="Document Caption / Subtítulo",
+        help="Summary caption sent alongside document attachment to Meta WhatsApp Cloud API.",
+    )
+    pdf_file_size = fields.Char(
+        string="PDF File Size",
+        compute="_compute_pdf_preview",
+    )
+    pdf_preview_html = fields.Html(
+        string="PDF Preview",
+        compute="_compute_pdf_preview",
+        sanitize=False,
+    )
+
+    def _get_effective_report(self):
+        """Retrieve the effective report action configured or default for model."""
+        self.ensure_one()
+        report = self.report_action_id
+        if not report:
+            if self.res_model == "sale.order":
+                report = self.env.ref("sale.action_report_saleorder", raise_if_not_found=False)
+            elif self.res_model == "account.move":
+                report = self.env.ref(
+                    "whatsapp_chatter_meta.action_report_invoice_whatsapp_modern",
+                    raise_if_not_found=False,
+                ) or self.env.ref(
+                    "account.account_invoices",
+                    raise_if_not_found=False,
+                ) or self.env.ref(
+                    "account.account_invoices_without_payment",
+                    raise_if_not_found=False,
+                )
+        return report
+
+    def action_view_pdf_fullscreen(self):
+        """Action returning act_url to open the rendered PDF report fullscreen in a new tab."""
+        self.ensure_one()
+        report = self._get_effective_report()
+        if not report or not self.res_id:
+            raise UserError(_("No report or record available to display."))
+        return {
+            "type": "ir.actions.act_url",
+            "url": f"/report/pdf/{report.report_name}/{self.res_id}",
+            "target": "new",
+        }
+
+    @api.depends("attach_pdf", "report_action_id", "res_model", "res_id", "pdf_filename")
+    def _compute_pdf_preview(self):
+        for wizard in self:
+            if (
+                not wizard.attach_pdf
+                or not wizard.res_model
+                or not wizard.res_id
+                or wizard.res_model not in wizard.env
+            ):
+                wizard.pdf_preview_html = False
+                wizard.pdf_file_size = False
+                continue
+
+            record = wizard.env[wizard.res_model].browse(wizard.res_id)
+            if not record.exists():
+                wizard.pdf_preview_html = False
+                wizard.pdf_file_size = False
+                continue
+
+            report = wizard._get_effective_report()
+            if not report:
+                wizard.pdf_preview_html = False
+                wizard.pdf_file_size = False
+                continue
+
+            filename = wizard.pdf_filename or "document.pdf"
+            if not filename.endswith(".pdf"):
+                filename = f"{filename}.pdf"
+
+            file_size_display = _("PDF Ready")
+            try:
+                pdf_content, _report_ext = (
+                    wizard.env["ir.actions.report"]
+                    .with_context(report_pdf_no_attachment=True)
+                    ._render_qweb_pdf(report.id, [record.id])
+                )
+                if pdf_content:
+                    size_bytes = len(pdf_content)
+                    if size_bytes < 1024:
+                        file_size_display = f"{size_bytes} B"
+                    elif size_bytes < 1024 * 1024:
+                        file_size_display = f"{size_bytes / 1024:.1f} KB"
+                    else:
+                        file_size_display = f"{size_bytes / (1024 * 1024):.1f} MB"
+            except Exception as e:  # noqa: BLE001
+                _logger.debug("PDF preview in-memory render estimation: %s", e)
+                file_size_display = _("Ready to generate")
+
+            wizard.pdf_file_size = file_size_display
+
+            badge_html = ""
+            if wizard.res_model == "account.move":
+                if record.payment_state in ("paid", "in_payment"):
+                    badge_html = '<span class="badge bg-success text-white p-2"><i class="fa fa-check-circle me-1"></i>PAGADA / PAID</span>'
+                elif record.payment_state == "reversed":
+                    badge_html = '<span class="badge bg-dark text-white p-2"><i class="fa fa-undo me-1"></i>REVERTIDA / REVERSED</span>'
+                elif record.state == "cancel":
+                    badge_html = '<span class="badge bg-danger text-white p-2"><i class="fa fa-ban me-1"></i>CANCELADA</span>'
+                elif record.state == "posted":
+                    due_date = (
+                        record.invoice_date_due.strftime("%d/%m/%Y")
+                        if record.invoice_date_due
+                        else "N/A"
+                    )
+                    if record.payment_state == "partial":
+                        badge_html = f'<span class="badge bg-warning text-dark p-2"><i class="fa fa-clock-o me-1"></i>Vence: {html_escape(due_date)} (Parcial)</span>'
+                    else:
+                        badge_html = f'<span class="badge bg-warning text-dark p-2"><i class="fa fa-clock-o me-1"></i>Vence: {html_escape(due_date)}</span>'
+                else:
+                    badge_html = '<span class="badge bg-secondary text-white p-2">BORRADOR</span>'
+            elif wizard.res_model == "sale.order":
+                if record.state in ("sale", "done"):
+                    badge_html = '<span class="badge bg-success text-white p-2"><i class="fa fa-check-circle me-1"></i>PEDIDO / SALE ORDER</span>'
+                elif record.state == "sent":
+                    badge_html = '<span class="badge bg-info text-white p-2"><i class="fa fa-paper-plane me-1"></i>ENVIADO / SENT</span>'
+                elif record.state == "cancel":
+                    badge_html = '<span class="badge bg-danger text-white p-2"><i class="fa fa-ban me-1"></i>CANCELADO / CANCELLED</span>'
+                else:
+                    badge_html = '<span class="badge bg-secondary text-white p-2">PRESUPUESTO / QUOTATION</span>'
+
+            fullscreen_url = f"/report/pdf/{html_escape(report.report_name)}/{record.id}"
+            report_display_name = html_escape(report.name or "")
+            clean_filename = html_escape(filename)
+
+            card_html = (
+                f'<div class="card border rounded shadow-sm p-3 mb-2 bg-light">'
+                f'  <div class="d-flex align-items-center justify-content-between mb-2 pb-2 border-bottom">'
+                f'    <div class="d-flex align-items-center">'
+                f'      <i class="fa fa-file-pdf-o text-danger fa-2x me-3"></i>'
+                f'      <div>'
+                f'        <h6 class="mb-0 fw-bold">{clean_filename}</h6>'
+                f'        <small class="text-muted">{report_display_name} &bull; {html_escape(file_size_display)}</small>'
+                f'      </div>'
+                f'    </div>'
+                f'    <div class="d-flex align-items-center gap-2">'
+                f'      {badge_html}'
+                f'      <a href="{fullscreen_url}" target="_blank" class="btn btn-sm btn-outline-primary">'
+                f'        <i class="fa fa-external-link me-1"></i>{_("Open Fullscreen PDF")}'
+                f'      </a>'
+                f'    </div>'
+                f'  </div>'
+                f'  <div class="rounded border overflow-hidden bg-white" style="height: 380px;">'
+                f'    <iframe src="{fullscreen_url}#toolbar=0&navpanes=0" style="width: 100%; height: 100%; border: none;" title="PDF Preview"></iframe>'
+                f'  </div>'
+                f'</div>'
+            )
+            wizard.pdf_preview_html = card_html
 
     @api.depends("template_id", "res_model", "res_id")
     def _compute_button_preview(self):
@@ -237,20 +390,7 @@ class WhatsAppComposerWizard(models.TransientModel):
             filename = f"{filename}.pdf"
 
         if self.attach_pdf:
-            report = self.report_action_id
-            if not report:
-                if self.res_model == "sale.order":
-                    report = self.env.ref(
-                        "sale.action_report_saleorder", raise_if_not_found=False,
-                    )
-                elif self.res_model == "account.move":
-                    report = self.env.ref(
-                        "account.account_invoices", raise_if_not_found=False,
-                    ) or self.env.ref(
-                        "account.account_invoices_without_payment",
-                        raise_if_not_found=False,
-                    )
-
+            report = self._get_effective_report()
             if not report:
                 raise UserError(
                     _(
@@ -338,6 +478,8 @@ class WhatsAppComposerWizard(models.TransientModel):
                         "filename": filename,
                     },
                 }
+                if self.caption:
+                    doc_payload["document"]["caption"] = self.caption
                 secondary_wamid = account.dispatch_whatsapp_message(doc_payload)
             else:
                 components = template._get_meta_components(record)
@@ -364,9 +506,11 @@ class WhatsAppComposerWizard(models.TransientModel):
                     "document": {
                         "id": media_id,
                         "filename": filename,
-                        "caption": self.body or "",
                     },
                 }
+                doc_caption = self.caption or self.body or ""
+                if doc_caption:
+                    doc_payload["document"]["caption"] = doc_caption
                 wamid = account.dispatch_whatsapp_message(doc_payload)
             else:
                 text_payload = {
@@ -403,6 +547,12 @@ class WhatsAppComposerWizard(models.TransientModel):
             f"<p>📱 <strong>{header_label}</strong></p>"
             f"<p>{html_escape(self.body or '')}</p>"
         )
+        if self.caption:
+            caption_label = _("Caption:")
+            chatter_body += f"<p><small style='color: #495057;'>📄 <strong>{caption_label}</strong> {html_escape(self.caption)}</small></p>"
+        if filename:
+            file_label = _("File:")
+            chatter_body += f"<p><small style='color: #6c757d;'>📎 <strong>{file_label}</strong> {html_escape(filename)}</small></p>"
         if self.message_mode == "template" and self.has_buttons and self.button_summary:
             buttons_label = _("Buttons:")
             chatter_body += f"<p><small style='color: #495057;'>🔘 <strong>{buttons_label}</strong> {html_escape(self.button_summary)}</small></p>"
@@ -429,6 +579,7 @@ class WhatsAppComposerWizard(models.TransientModel):
                 if (self.message_mode == "template" and self.template_id)
                 else False,
                 "body": self.body or "",
+                "caption": self.caption or False,
                 "attachment_id": attachment.id
                 if (attachment and not secondary_wamid)
                 else False,
@@ -450,6 +601,7 @@ class WhatsAppComposerWizard(models.TransientModel):
                     "direction": "outbound",
                     "message_type": "document",
                     "body": filename,
+                    "caption": self.caption or False,
                     "attachment_id": attachment.id if attachment else False,
                     "media_id": media_id or False,
                     "res_model": record._name,

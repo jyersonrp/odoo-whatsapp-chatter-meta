@@ -48,6 +48,11 @@ class ResConfigSettings(models.TransientModel):
         readonly=False,
         string="Escalation Threshold in Hours",
     )
+    whatsapp_invoice_logo = fields.Binary(
+        related="company_id.whatsapp_invoice_logo",
+        readonly=False,
+        string="WhatsApp Invoice Logo",
+    )
 
     def action_test_whatsapp_connection(self):
         self.ensure_one()

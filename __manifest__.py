@@ -40,6 +40,7 @@ Key Features:
         "views/whatsapp_template_views.xml",
         "views/whatsapp_message_views.xml",
         "views/res_config_settings_views.xml",
+        "views/report_invoice_whatsapp_modern.xml",
         "views/sale_order_views.xml",
         "views/account_move_views.xml",
         "wizard/whatsapp_composer_wizard_views.xml",

@@ -68,6 +68,7 @@ class WhatsAppMessage(models.Model):
         default="text",
     )
     body = fields.Text(string="Content")
+    caption = fields.Char(string="Caption", help="Caption text sent or received with media/document.")
     attachment_id = fields.Many2one(
         "ir.attachment",
         string="Attachment",

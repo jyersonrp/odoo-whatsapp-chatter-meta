@@ -1854,3 +1854,105 @@ msgstr "ej. envio_cotizacion_v1"
 #: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_template_form
 msgid "partner_id.name, name, amount_total"
 msgstr "partner_id.name, name, amount_total"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_res_company__whatsapp_invoice_logo
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_res_config_settings__whatsapp_invoice_logo
+msgid "WhatsApp Invoice Logo"
+msgstr "Logo de Factura para WhatsApp"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.res_config_settings_view_form_inherit_whatsapp
+msgid "WhatsApp Invoice Branding"
+msgstr "Marca de Factura para WhatsApp"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.actions.report,name:whatsapp_chatter_meta.action_report_invoice_whatsapp_modern
+msgid "Modern WhatsApp Invoice"
+msgstr "Factura Moderna WhatsApp"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_composer_wizard__caption
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_message__caption
+msgid "Document Caption / Subtítulo"
+msgstr "Subtítulo / Resumen de Documento"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_composer_wizard__pdf_file_size
+msgid "PDF File Size"
+msgstr "Tamaño de Archivo PDF"
+
+#. module: whatsapp_chatter_meta
+#: model:ir.model.fields,field_description:whatsapp_chatter_meta.field_whatsapp_composer_wizard__pdf_preview_html
+msgid "PDF Preview"
+msgstr "Previsualización de PDF"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_composer_wizard_form
+msgid "Open Fullscreen PDF"
+msgstr "Ver PDF Completo"
+
+#. module: whatsapp_chatter_meta
+#: model_terms:ir.ui.view,arch_db:whatsapp_chatter_meta.view_whatsapp_composer_wizard_form
+msgid "Interactive Document Preview"
+msgstr "Previsualización Interactiva del Documento"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/wizard/whatsapp_composer_wizard.py:0
+msgid "Open Fullscreen PDF"
+msgstr "Ver PDF Completo"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/wizard/whatsapp_composer_wizard.py:0
+msgid "PDF Ready"
+msgstr "PDF Listo"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/wizard/whatsapp_composer_wizard.py:0
+msgid "Ready to generate"
+msgstr "Listo para compilar"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/wizard/whatsapp_composer_wizard.py:0
+msgid "PDF Document"
+msgstr "Documento PDF"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/wizard/whatsapp_composer_wizard.py:0
+msgid "No report or record available to display."
+msgstr "No hay reporte o registro disponible para mostrar."
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/wizard/whatsapp_composer_wizard.py:0
+msgid "Caption:"
+msgstr "Subtítulo:"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/wizard/whatsapp_composer_wizard.py:0
+msgid "File:"
+msgstr "Archivo:"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/account_move.py:0
+msgid "Send Invoice via WhatsApp"
+msgstr "Enviar Factura por WhatsApp"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/account_move.py:0
+msgid "Inmediato"
+msgstr "Inmediato"
+
+#. module: whatsapp_chatter_meta
+#. odoo-python
+#: code:addons/whatsapp_chatter_meta/models/account_move.py:0
+msgid "Immediate"
+msgstr "Inmediato"

@@ -59,10 +59,28 @@
                     </page>
                     <page string="Official PDF Attachment">
                         <group>
-                            <field name="attach_pdf"/>
-                            <field name="pdf_filename" invisible="not attach_pdf"/>
-                            <field name="report_action_id" invisible="not attach_pdf" options="{'no_create': True}"/>
+                            <group>
+                                <field name="attach_pdf"/>
+                                <field name="pdf_filename" invisible="not attach_pdf"/>
+                            </group>
+                            <group>
+                                <field name="report_action_id" invisible="not attach_pdf" options="{'no_create': True}"/>
+                                <field name="caption" invisible="not attach_pdf" placeholder="e.g. 📄 Factura: INV/2026/0001 | Total: $1,500.00 | Vence: 30/10/2026"/>
+                            </group>
                         </group>
+                        <div invisible="not attach_pdf" class="mb-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="fw-bold text-muted">
+                                    <i class="fa fa-file-text-o me-1"/> Interactive Document Preview
+                                </span>
+                                <button name="action_view_pdf_fullscreen" 
+                                        type="object" 
+                                        string="Open Fullscreen PDF" 
+                                        class="btn btn-sm btn-outline-primary" 
+                                        icon="fa-external-link"/>
+                            </div>
+                            <field name="pdf_preview_html" widget="html" nolabel="1" readonly="1" options="{'cssReadonly': True}"/>
+                        </div>
                     </page>
                 </notebook>
 

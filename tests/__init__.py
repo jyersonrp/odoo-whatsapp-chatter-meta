@@ -7,5 +7,6 @@ from . import (
     test_whatsapp_escalation,
     test_whatsapp_i18n,
     test_whatsapp_media_and_health,
+    test_whatsapp_modern_invoice,
     test_whatsapp_webhook,
 )

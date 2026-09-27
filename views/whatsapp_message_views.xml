@@ -12,6 +12,7 @@
                 <field name="recipient"/>
                 <field name="partner_id"/>
                 <field name="res_model"/>
+                <field name="caption"/>
                 <filter string="Inbound" name="filter_inbound" domain="[('direction', '=', 'inbound')]"/>
                 <filter string="Outbound" name="filter_outbound" domain="[('direction', '=', 'outbound')]"/>
                 <separator/>
@@ -45,6 +46,7 @@
                 <field name="partner_id"/>
                 <field name="res_model" optional="show"/>
                 <field name="res_id" optional="show"/>
+                <field name="caption" optional="hide"/>
                 <field name="status" 
                        widget="badge"
                        decoration-danger="status == 'failed'"
@@ -90,6 +92,7 @@
                             <field name="partner_id"/>
                             <field name="res_model"/>
                             <field name="res_id"/>
+                            <field name="caption" invisible="not caption"/>
                             <field name="attachment_id" invisible="not attachment_id"/>
                             <field name="media_id" invisible="not media_id"/>
                         </group>

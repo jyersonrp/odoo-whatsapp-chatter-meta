@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Action Report for WhatsApp Modern Quotation / Sale Order -->
+    <record id="action_report_saleorder_whatsapp_modern" model="ir.actions.report">
+        <field name="name">Modern WhatsApp Quotation</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">whatsapp_chatter_meta.report_saleorder_whatsapp_modern</field>
+        <field name="report_file">whatsapp_chatter_meta.report_saleorder_whatsapp_modern</field>
+        <field name="print_report_name">(object._get_whatsapp_safe_filename(extension=False) if hasattr(object, '_get_whatsapp_safe_filename') else object.name)</field>
+        <field name="attachment"/>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- Master Template Wrapper -->
+    <template id="report_saleorder_whatsapp_modern">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="lang" t-value="o.partner_id.lang or o.env.lang"/>
+                <t t-call="whatsapp_chatter_meta.report_saleorder_whatsapp_modern_document" t-lang="lang"/>
+            </t>
+        </t>
+    </template>
+
+    <!-- Document Layout Template -->
+    <template id="report_saleorder_whatsapp_modern_document">
+        <t t-call="web.basic_layout">
+            <t t-set="o" t-value="o.with_context(lang=lang)"/>
+            <div class="page" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #2d3748; font-size: 13px; line-height: 1.5; padding: 10px 15px;">
+                <!-- Header with Corporate / WhatsApp Branding -->
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                    <tr>
+                        <td style="width: 50%; vertical-align: top;">
+                            <t t-set="inv_logo" t-value="o.company_id._get_whatsapp_invoice_logo()"/>
+                            <img t-if="inv_logo" 
+                                 t-att-src="image_data_uri(inv_logo)" 
+                                 style="max-height: 75px; max-width: 220px; object-fit: contain;" 
+                                 alt="Company Logo"/>
+                            <h3 t-else="" t-field="o.company_id.name" style="margin: 0; color: #198754; font-weight: 700;"/>
+                        </td>
+                        <td style="width: 50%; vertical-align: top; text-align: right; font-size: 12px; color: #6c757d; line-height: 1.4;">
+                            <strong style="color: #212529; font-size: 14px;" t-field="o.company_id.name"/><br/>
+                            <span t-if="o.company_id.vat">Tax ID / VAT: <strong t-field="o.company_id.vat"/><br/></span>
+                            <span t-if="o.company_id.street" t-field="o.company_id.street"/><br/>
+                            <span t-if="o.company_id.city or o.company_id.country_id">
+                                <span t-if="o.company_id.city" t-field="o.company_id.city"/>
+                                <span t-if="o.company_id.city and o.company_id.country_id">, </span>
+                                <span t-if="o.company_id.country_id" t-field="o.company_id.country_id.name"/><br/>
+                            </span>
+                            <span t-if="o.company_id.phone">Tel: <span t-field="o.company_id.phone"/><br/></span>
+                            <span t-if="o.company_id.email" t-field="o.company_id.email"/>
+                        </td>
+                    </tr>
+                </table>
+
+                <hr style="border: none; border-top: 2px solid #e9ecef; margin: 15px 0 20px 0;"/>
+
+                <!-- Quotation / Order Details & Dynamic Status Stamp -->
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                    <tr>
+                        <td style="width: 55%; vertical-align: middle;">
+                            <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #6c757d;">
+                                <t t-if="o.state in ('sale', 'done')">Pedido de Venta / Sale Order</t>
+                                <t t-elif="o.state == 'cancel'">Presupuesto Cancelado / Cancelled</t>
+                                <t t-else="">Cotización / Quotation</t>
+                            </span>
+                            <h2 style="margin: 4px 0 8px 0; font-size: 24px; font-weight: 800; color: #1a202c;">
+                                <span t-if="o.name" t-field="o.name"/>
+                                <span t-else="">Borrador / Draft</span>
+                            </h2>
+                            <div style="font-size: 12px; color: #495057; line-height: 1.5;">
+                                <strong>Fecha / Date:</strong> <span t-field="o.date_order" t-options='{"widget": "date"}'/><br/>
+                                <span t-if="o.validity_date and o.state in ('draft', 'sent')">
+                                    <strong>Vigencia / Expiration:</strong> <span t-field="o.validity_date" t-options='{"widget": "date"}'/><br/>
+                                </span>
+                                <span t-if="o.user_id">
+                                    <strong>Comercial / Salesperson:</strong> <span t-field="o.user_id.name"/><br/>
+                                </span>
+                                <span t-if="o.client_order_ref">
+                                    <strong>Referencia / Ref:</strong> <span t-field="o.client_order_ref"/>
+                                </span>
+                            </div>
+                        </td>
+                        <td style="width: 45%; vertical-align: middle; text-align: right;">
+                            <!-- Dynamic Commercial Status Stamp -->
+                            <t t-if="o.state in ('sale', 'done')">
+                                <div style="display: inline-block; padding: 10px 24px; border: 3px solid #198754; border-radius: 12px; background-color: #d1e7dd; color: #0f5132; text-align: center;">
+                                    <div style="font-size: 18px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase;">
+                                        ✓ CONFIRMADO / ORDER
+                                    </div>
+                                    <small style="font-size: 11px; font-weight: 600; color: #198754; text-transform: uppercase;">
+                                        Pedido de Venta en Firme
+                                    </small>
+                                </div>
+                            </t>
+                            <t t-elif="o.state == 'sent'">
+                                <div style="display: inline-block; padding: 10px 22px; border: 2px solid #0d6efd; border-radius: 12px; background-color: #e8f4fd; color: #084298; text-align: center;">
+                                    <div style="font-size: 16px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;">
+                                        ENVIADO / SENT
+                                    </div>
+                                    <small style="font-size: 11px; font-weight: 600; color: #0d6efd; text-transform: uppercase;">
+                                        Propuesta Comercial Emitida
+                                    </small>
+                                </div>
+                            </t>
+                            <t t-elif="o.state == 'cancel'">
+                                <div style="display: inline-block; padding: 10px 22px; border: 3px solid #dc3545; border-radius: 12px; background-color: #f8d7da; color: #842029; text-align: center;">
+                                    <div style="font-size: 16px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;">
+                                        CANCELADO / CANCELLED
+                                    </div>
+                                </div>
+                            </t>
+                            <t t-else="">
+                                <div style="display: inline-block; padding: 10px 20px; border: 2px solid #fd7e14; border-radius: 12px; background-color: #fff3cd; color: #664d03; text-align: center;">
+                                    <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: #856404; letter-spacing: 0.5px;">
+                                        Presupuesto / Quotation
+                                    </div>
+                                    <div style="font-size: 16px; font-weight: 800; color: #d63384;">
+                                        <span t-if="o.validity_date" t-field="o.validity_date" t-options='{"widget": "date"}'/>
+                                        <span t-else="">Cotización Activa</span>
+                                    </div>
+                                    <small style="font-size: 10px; font-weight: 600; color: #856404; text-transform: uppercase;">
+                                        Pendiente de Confirmación
+                                    </small>
+                                </div>
+                            </t>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- Customer Info Card -->
+                <div style="background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 12px 16px; margin-bottom: 22px;">
+                    <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #6c757d; margin-bottom: 4px;">
+                        Cotizar a / Quotation To
+                    </div>
+                    <div style="font-size: 14px; font-weight: 700; color: #212529;">
+                        <span t-field="o.partner_id.name"/>
+                    </div>
+                    <div style="font-size: 12px; color: #495057; margin-top: 3px; line-height: 1.4;">
+                        <span t-if="o.partner_id.vat">Tax ID / VAT: <span t-field="o.partner_id.vat"/><br/></span>
+                        <span t-if="o.partner_id.street" t-field="o.partner_id.street"/><br/>
+                        <span t-if="o.partner_id.city or o.partner_id.country_id">
+                            <span t-if="o.partner_id.city" t-field="o.partner_id.city"/>
+                            <span t-if="o.partner_id.city and o.partner_id.country_id">, </span>
+                            <span t-if="o.partner_id.country_id" t-field="o.partner_id.country_id.name"/><br/>
+                        </span>
+                        <span t-if="o.partner_id.phone">Tel: <span t-field="o.partner_id.phone"/> </span>
+                        <span t-if="o.partner_id.email">| Email: <span t-field="o.partner_id.email"/></span>
+                    </div>
+                </div>
+
+                <!-- Line Items Table -->
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                    <thead>
+                        <tr style="background-color: #212529; color: #ffffff;">
+                            <th style="padding: 9px 12px; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; border-top-left-radius: 6px;">Descripción / Description</th>
+                            <th style="padding: 9px 12px; text-align: center; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; width: 14%;">Cant / Qty</th>
+                            <th style="padding: 9px 12px; text-align: right; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; width: 18%;">Precio / Price</th>
+                            <th style="padding: 9px 12px; text-align: center; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; width: 14%;">Imp / Taxes</th>
+                            <th style="padding: 9px 12px; text-align: right; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; width: 18%; border-top-right-radius: 6px;">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="o.order_line" t-as="line">
+                            <t t-if="line.display_type == 'line_section'">
+                                <tr style="background-color: #e9ecef;">
+                                    <td colspan="5" style="padding: 8px 12px; font-weight: 700; color: #343a40; font-size: 12px;">
+                                        <span t-field="line.name"/>
+                                    </td>
+                                </tr>
+                            </t>
+                            <t t-elif="line.display_type == 'line_note'">
+                                <tr>
+                                    <td colspan="5" style="padding: 6px 12px; font-style: italic; color: #6c757d; font-size: 11px; border-bottom: 1px solid #f1f3f5;">
+                                        <span t-field="line.name"/>
+                                    </td>
+                                </tr>
+                            </t>
+                            <t t-else="">
+                                <tr style="border-bottom: 1px solid #e9ecef;">
+                                    <td style="padding: 10px 12px; vertical-align: top; color: #212529;">
+                                        <strong t-field="line.name"/>
+                                    </td>
+                                    <td style="padding: 10px 12px; text-align: center; vertical-align: top; color: #495057;">
+                                        <span t-field="line.product_uom_qty"/>
+                                        <span t-if="line.product_uom_id and line.product_uom_id.name != 'Units'" t-field="line.product_uom_id.name" style="font-size: 10px; color: #6c757d;"/>
+                                    </td>
+                                    <td style="padding: 10px 12px; text-align: right; vertical-align: top; color: #495057;">
+                                        <span t-field="line.price_unit"/>
+                                        <div t-if="line.discount" style="font-size: 10px; color: #dc3545; font-weight: 600;">Desc: <span t-field="line.discount"/>%</div>
+                                    </td>
+                                    <td style="padding: 10px 12px; text-align: center; vertical-align: top; font-size: 11px; color: #6c757d;">
+                                        <span t-out="', '.join(map(lambda x: (x.description or x.name), line.tax_ids))"/>
+                                    </td>
+                                    <td style="padding: 10px 12px; text-align: right; vertical-align: top; font-weight: 600; color: #212529;">
+                                        <span t-field="line.price_subtotal"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </t>
+                    </tbody>
+                </table>
+
+                <!-- Totals and Payment Terms Area -->
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: 25px;">
+                    <tr>
+                        <td style="width: 50%; vertical-align: top; padding-right: 20px;">
+                            <div t-if="o.payment_term_id" style="margin-bottom: 12px;">
+                                <strong style="font-size: 12px; color: #212529;">Términos de Pago / Terms:</strong><br/>
+                                <span style="font-size: 12px; color: #495057;" t-field="o.payment_term_id.name"/>
+                            </div>
+                            <div t-if="o.note" style="font-size: 11px; color: #6c757d; margin-top: 8px;">
+                                <span t-field="o.note"/>
+                            </div>
+                        </td>
+                        <td style="width: 50%; vertical-align: top;">
+                            <table style="width: 100%; border-collapse: collapse;">
+                                <tr>
+                                    <td style="padding: 6px 10px; font-size: 13px; color: #6c757d;">Base Imponible / Untaxed:</td>
+                                    <td style="padding: 6px 10px; text-align: right; font-size: 13px; font-weight: 600; color: #212529;">
+                                        <span t-field="o.amount_untaxed"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 6px 10px; font-size: 13px; color: #6c757d;">Impuestos / Taxes:</td>
+                                    <td style="padding: 6px 10px; text-align: right; font-size: 13px; font-weight: 600; color: #212529;">
+                                        <span t-field="o.amount_tax"/>
+                                    </td>
+                                </tr>
+                                <tr style="border-top: 2px solid #0d6efd; border-bottom: 2px solid #0d6efd; background-color: #e8f4fd;">
+                                    <td style="padding: 10px 12px; font-size: 15px; font-weight: 800; color: #0d6efd;">TOTAL:</td>
+                                    <td style="padding: 10px 12px; text-align: right; font-size: 17px; font-weight: 900; color: #0d6efd;">
+                                        <span t-field="o.amount_total"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- Footer note -->
+                <div style="border-top: 1px solid #dee2e6; padding-top: 12px; text-align: center; font-size: 10px; color: #adb5bd;">
+                    <span>Documento comercial optimizado para visualización vía WhatsApp | </span>
+                    <span t-field="o.company_id.name"/>
+                    <span t-if="o.company_id.website"> | <span t-field="o.company_id.website"/></span>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

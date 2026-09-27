@@ -107,7 +107,10 @@ class WhatsAppComposerWizard(models.TransientModel):
         report = self.report_action_id
         if not report:
             if self.res_model == "sale.order":
-                report = self.env.ref("sale.action_report_saleorder", raise_if_not_found=False)
+                report = self.env.ref(
+                    "whatsapp_chatter_meta.action_report_saleorder_whatsapp_modern",
+                    raise_if_not_found=False,
+                ) or self.env.ref("sale.action_report_saleorder", raise_if_not_found=False)
             elif self.res_model == "account.move":
                 report = self.env.ref(
                     "whatsapp_chatter_meta.action_report_invoice_whatsapp_modern",

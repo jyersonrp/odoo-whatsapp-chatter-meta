@@ -41,6 +41,7 @@ Key Features:
         "views/whatsapp_message_views.xml",
         "views/res_config_settings_views.xml",
         "views/report_invoice_whatsapp_modern.xml",
+        "views/report_saleorder_whatsapp_modern.xml",
         "views/sale_order_views.xml",
         "views/account_move_views.xml",
         "wizard/whatsapp_composer_wizard_views.xml",

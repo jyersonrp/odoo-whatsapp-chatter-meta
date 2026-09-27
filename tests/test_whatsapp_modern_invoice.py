@@ -727,3 +727,64 @@ class TestWhatsAppModernInvoice(TransactionCase):
         html_str = html_bytes.decode("utf-8") if isinstance(html_bytes, bytes) else html_bytes
         self.assertIn("Consultoría Internacional USD", html_str)
         self.assertIn(usd_currency.symbol, html_str)
+
+    def test_12_sale_order_modern_report_filename_caption_and_rendering(self):
+        """Verifica el reporte moderno de Cotización/Pedido de Venta para WhatsApp."""
+        so = self.env["sale.order"].create(
+            {
+                "partner_id": self.partner.id,
+                "validity_date": date.today() + timedelta(days=30),
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "product_id": self.product.id,
+                            "product_uom_qty": 2.0,
+                            "price_unit": 211.0,
+                            "name": "Lamp Design Modern",
+                        },
+                    ),
+                ],
+            },
+        )
+
+        # 1. Filename inteligente
+        self.partner.lang = "es_ES"
+        fn_draft = so._get_whatsapp_safe_filename()
+        self.assertTrue(fn_draft.startswith("Cotizacion_"))
+        self.assertTrue(fn_draft.endswith(".pdf"))
+
+        so.state = "sale"
+        fn_sale = so._get_whatsapp_safe_filename()
+        self.assertTrue(fn_sale.startswith("Pedido_"))
+        so.state = "draft"
+
+        # 2. Smart caption
+        caption = so._get_whatsapp_order_caption()
+        self.assertIn("Cotización:", caption)
+        self.assertIn("422.00", caption)
+
+        # 3. action_send_whatsapp preselecciona el reporte moderno de sale.order
+        action = so.action_send_whatsapp()
+        report_so_modern = self.env.ref(
+            "whatsapp_chatter_meta.action_report_saleorder_whatsapp_modern",
+        )
+        self.assertEqual(action["context"]["default_report_action_id"], report_so_modern.id)
+        self.assertTrue(action["context"]["default_pdf_filename"].startswith("Cotizacion_"))
+
+        # 4. Render HTML en memoria
+        html_bytes, _ext = self.env["ir.actions.report"]._render_qweb_html(
+            report_so_modern.id, [so.id],
+        )
+        html_str = html_bytes.decode("utf-8") if isinstance(html_bytes, bytes) else html_bytes
+        self.assertIn("Lamp Design Modern", html_str)
+        self.assertIn("Presupuesto / Quotation", html_str)
+        self.assertIn("Cotizar a / Quotation To", html_str)
+
+        # 5. Render PDF en memoria
+        pdf_bytes, _ext = self.env["ir.actions.report"].with_context(
+            report_pdf_no_attachment=True,
+        )._render_qweb_pdf(report_so_modern.id, [so.id])
+        self.assertTrue(pdf_bytes)
+        self.assertTrue(pdf_bytes.startswith(b"%PDF") or b"<html" in pdf_bytes or b"<!DOCTYPE" in pdf_bytes)

@@ -2,6 +2,7 @@
 
 import logging
 
+from markupsafe import Markup
 from markupsafe import escape as html_escape
 
 from odoo import _, api, fields, models
@@ -547,26 +548,26 @@ class WhatsAppComposerWizard(models.TransientModel):
             )
 
         # 7. Registrar mensaje saliente en el Chatter
-        id_info = f"<code>{wamid}</code>"
+        id_info = f"<code>{html_escape(str(wamid))}</code>"
         if secondary_wamid:
-            id_info += f", Attachment: <code>{secondary_wamid}</code>"
+            id_info += f", Attachment: <code>{html_escape(str(secondary_wamid))}</code>"
         header_label = _("Message sent via WhatsApp (%s):", formatted_phone)
         chatter_body = (
-            f"<p>📱 <strong>{header_label}</strong></p>"
+            f"<p>📱 <strong>{html_escape(header_label)}</strong></p>"
             f"<p>{html_escape(self.body or '')}</p>"
         )
         if self.caption:
             caption_label = _("Caption:")
-            chatter_body += f"<p><small style='color: #495057;'>📄 <strong>{caption_label}</strong> {html_escape(self.caption)}</small></p>"
+            chatter_body += f"<p><small style='color: #495057;'>📄 <strong>{html_escape(caption_label)}</strong> {html_escape(self.caption)}</small></p>"
         if filename:
             file_label = _("File:")
-            chatter_body += f"<p><small style='color: #6c757d;'>📎 <strong>{file_label}</strong> {html_escape(filename)}</small></p>"
+            chatter_body += f"<p><small style='color: #6c757d;'>📎 <strong>{html_escape(file_label)}</strong> {html_escape(filename)}</small></p>"
         if self.message_mode == "template" and self.has_buttons and self.button_summary:
             buttons_label = _("Buttons:")
-            chatter_body += f"<p><small style='color: #495057;'>🔘 <strong>{buttons_label}</strong> {html_escape(self.button_summary)}</small></p>"
+            chatter_body += f"<p><small style='color: #495057;'>🔘 <strong>{html_escape(buttons_label)}</strong> {html_escape(self.button_summary)}</small></p>"
         chatter_body += f"<p><small style='color: #6c757d;'>WhatsApp Message ID: {id_info}</small></p>"
         record.message_post(
-            body=chatter_body,
+            body=Markup(chatter_body),
             attachment_ids=[attachment.id] if attachment else [],
             message_type="comment",
             subtype_xmlid="mail.mt_comment",

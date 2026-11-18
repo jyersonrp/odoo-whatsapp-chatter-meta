@@ -1175,3 +1175,268 @@ class TestWhatsAppWebhook(TransactionCase):
         self.assertEqual(
             action_reactivated["context"]["default_message_mode"], "freeform",
         )
+
+    def test_19_chatter_markup_html_not_double_escaped(self):
+        """Regression test: Chatter messages must render HTML tags cleanly without &lt;p&gt; double-escaping,
+        while escaping untrusted user input against XSS.
+        """
+        incoming_wamid = "wamid.HBgL_MARKUP_CHECK_19"
+        payload = {
+            "entry": [
+                {
+                    "id": self.account.waba_id,
+                    "changes": [
+                        {
+                            "value": {
+                                "messaging_product": "whatsapp",
+                                "metadata": {
+                                    "phone_number_id": self.account.phone_number_id,
+                                },
+                                "contacts": [
+                                    {
+                                        "wa_id": "16505559876",
+                                        "profile": {"name": "Cliente <b>Markup</b>"},
+                                    },
+                                ],
+                                "messages": [
+                                    {
+                                        "from": "16505559876",
+                                        "id": incoming_wamid,
+                                        "type": "text",
+                                        "text": {"body": "Hola <script>alert(1)</script>"},
+                                    },
+                                ],
+                            },
+                        },
+                    ],
+                },
+            ],
+        }
+        raw_body = json.dumps(payload).encode("utf-8")
+        mock_req = self._mock_request(
+            headers={"X-Hub-Signature-256": self._sign_payload(raw_body)},
+            data=raw_body,
+        )
+        with patch(
+            "odoo.addons.whatsapp_chatter_meta.controllers.webhook.request",
+            new=mock_req,
+        ):
+            self.controller.webhook_receive()
+
+        latest_msg = self.sale_order.message_ids[0]
+        self.assertNotIn("&lt;p&gt;", latest_msg.body)
+        self.assertNotIn("&lt;strong&gt;", latest_msg.body)
+        self.assertIn("<strong>", latest_msg.body)
+        self.assertNotIn("<script>", latest_msg.body)
+        self.assertIn("&lt;script&gt;", latest_msg.body)
+
+    def test_20_cross_country_phone_collision_isolation(self):
+        """Regression test: +1 416 555 0199 (Canada) and +58 416 555 0199 (Venezuela)
+        share the last 10 digits (4165550199) and must NEVER cross-contaminate partner
+        lookup or 24-hour window state.
+        """
+        partner_ca = self.env["res.partner"].create(
+            {
+                "name": "Partner Toronto Canada",
+                "phone": "+1 416 555 0199",
+                "country_id": self.env.ref("base.ca").id,
+            },
+        )
+        partner_ve = self.env["res.partner"].create(
+            {
+                "name": "Partner Caracas Venezuela",
+                "phone": "+58 416 555 0199",
+                "country_id": self.env.ref("base.ve").id,
+            },
+        )
+        order_ca = self.env["sale.order"].create({"partner_id": partner_ca.id})
+        order_ve = self.env["sale.order"].create({"partner_id": partner_ve.id})
+
+        wamid_ve = "wamid.HBgL_VE_ISOLATION_20"
+        payload = {
+            "entry": [
+                {
+                    "id": self.account.waba_id,
+                    "changes": [
+                        {
+                            "value": {
+                                "messaging_product": "whatsapp",
+                                "metadata": {
+                                    "phone_number_id": self.account.phone_number_id,
+                                },
+                                "contacts": [
+                                    {
+                                        "wa_id": "584165550199",
+                                        "profile": {"name": "Yerson VE"},
+                                    },
+                                ],
+                                "messages": [
+                                    {
+                                        "from": "584165550199",
+                                        "id": wamid_ve,
+                                        "type": "text",
+                                        "text": {"body": "Mensaje exclusivo desde Venezuela"},
+                                    },
+                                ],
+                            },
+                        },
+                    ],
+                },
+            ],
+        }
+        raw_body = json.dumps(payload).encode("utf-8")
+        mock_req = self._mock_request(
+            headers={"X-Hub-Signature-256": self._sign_payload(raw_body)},
+            data=raw_body,
+        )
+        with patch(
+            "odoo.addons.whatsapp_chatter_meta.controllers.webhook.request",
+            new=mock_req,
+        ):
+            self.controller.webhook_receive()
+
+        wa_msg = self.env["whatsapp.message"].search([("wamid", "=", wamid_ve)], limit=1)
+        self.assertEqual(wa_msg.partner_id.id, partner_ve.id)
+        self.assertEqual(wa_msg.res_id, order_ve.id)
+        self.assertTrue(order_ve._is_whatsapp_window_open(partner_ve.phone))
+        self.assertFalse(order_ca._is_whatsapp_window_open(partner_ca.phone))
+
+    def test_21_monotonic_status_prevents_out_of_order_regression(self):
+        """Regression test: Out-of-order 'delivered' or 'sent' webhook events must not
+        downgrade a message that is already in 'read' state.
+        """
+        wamid = "wamid.HBgL_MONOTONIC_21"
+        wa_msg = self.env["whatsapp.message"].create(
+            {
+                "wamid": wamid,
+                "account_id": self.account.id,
+                "sender": self.account.phone_number_id,
+                "recipient": "+16505559876",
+                "direction": "outbound",
+                "status": "read",
+            },
+        )
+        payload = {
+            "entry": [
+                {
+                    "id": self.account.waba_id,
+                    "changes": [
+                        {
+                            "value": {
+                                "messaging_product": "whatsapp",
+                                "metadata": {
+                                    "phone_number_id": self.account.phone_number_id,
+                                },
+                                "statuses": [
+                                    {
+                                        "id": wamid,
+                                        "status": "delivered",
+                                        "timestamp": "1725550000",
+                                    },
+                                ],
+                            },
+                        },
+                    ],
+                },
+            ],
+        }
+        raw_body = json.dumps(payload).encode("utf-8")
+        mock_req = self._mock_request(
+            headers={"X-Hub-Signature-256": self._sign_payload(raw_body)},
+            data=raw_body,
+        )
+        with patch(
+            "odoo.addons.whatsapp_chatter_meta.controllers.webhook.request",
+            new=mock_req,
+        ):
+            self.controller.webhook_receive()
+
+        wa_msg.invalidate_recordset()
+        self.assertEqual(wa_msg.status, "read")
+
+    def test_22_inbound_reply_marks_outbound_replied_and_template_field_whitelist(self):
+        """Regression test:
+        1. Inbound reply marks prior unanswered outbound messages with replied=True (keeping escalated=False).
+        2. Template _eval_field_path blocks private attributes and secret fields.
+        """
+        out_msg = self.env["whatsapp.message"].create(
+            {
+                "wamid": "wamid.HBgL_OUT_BEFORE_REPLY_22",
+                "account_id": self.account.id,
+                "sender": self.account.phone_number_id,
+                "recipient": "+16505559876",
+                "direction": "outbound",
+                "res_model": "sale.order",
+                "res_id": self.sale_order.id,
+                "partner_id": self.partner.id,
+                "status": "delivered",
+            },
+        )
+        self.assertFalse(out_msg.replied)
+
+        payload = {
+            "entry": [
+                {
+                    "id": self.account.waba_id,
+                    "changes": [
+                        {
+                            "value": {
+                                "messaging_product": "whatsapp",
+                                "metadata": {
+                                    "phone_number_id": self.account.phone_number_id,
+                                },
+                                "messages": [
+                                    {
+                                        "from": "16505559876",
+                                        "id": "wamid.HBgL_IN_REPLY_22",
+                                        "type": "text",
+                                        "text": {"body": "Recibido, gracias"},
+                                        "context": {"id": out_msg.wamid},
+                                    },
+                                ],
+                            },
+                        },
+                    ],
+                },
+            ],
+        }
+        raw_body = json.dumps(payload).encode("utf-8")
+        mock_req = self._mock_request(
+            headers={"X-Hub-Signature-256": self._sign_payload(raw_body)},
+            data=raw_body,
+        )
+        with patch(
+            "odoo.addons.whatsapp_chatter_meta.controllers.webhook.request",
+            new=mock_req,
+        ):
+            self.controller.webhook_receive()
+
+        out_msg.invalidate_recordset()
+        self.assertTrue(out_msg.replied)
+        self.assertFalse(out_msg.escalated)
+
+        # Verify field path whitelist blocks secrets and private attributes
+        tpl = self.env["whatsapp.template"].create(
+            {
+                "name": "tpl_security_whitelist_22",
+                "account_id": self.account.id,
+                "model_id": self.env.ref("sale.model_sale_order").id,
+                "body": "Test {{1}}",
+            },
+        )
+        self.assertEqual(
+            tpl._eval_field_path(
+                self.sale_order,
+                "company_id.whatsapp_account_id.graph_api_token",
+            ),
+            "",
+        )
+        self.assertEqual(
+            tpl._eval_field_path(
+                self.sale_order,
+                "company_id.whatsapp_account_id.app_secret",
+            ),
+            "",
+        )
+        self.assertEqual(tpl._eval_field_path(self.sale_order, "_cr"), "")
+        self.assertEqual(tpl._eval_field_path(self.sale_order, "env"), "")

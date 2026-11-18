@@ -195,9 +195,16 @@ class MailThread(models.AbstractModel):
             commercial_id = getattr(partner, "commercial_partner_id", partner).id
             conditions.append(("partner_id", "child_of", commercial_id))
         if phone:
-            digits = re.sub(r"\D", "", phone)
-            if digits:
-                conditions.append(("sender", "like", digits[-10:]))
+            formatted_phone = self._format_whatsapp_phone(phone, partner)
+            raw_digits = re.sub(r"\D", "", str(phone))
+            norm_digits = formatted_phone.lstrip("+") if formatted_phone else ""
+            sender_variants = [
+                v
+                for v in {formatted_phone, norm_digits, f"+{raw_digits}", raw_digits}
+                if v and v != "+"
+            ]
+            if sender_variants:
+                conditions.append(("sender", "in", sender_variants))
 
         if conditions:
             if len(conditions) > 1:

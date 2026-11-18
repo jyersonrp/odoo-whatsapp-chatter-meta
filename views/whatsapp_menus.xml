@@ -22,6 +22,7 @@
     <menuitem id="menu_whatsapp_configuration" 
               name="Configuration" 
               parent="menu_whatsapp_root" 
+              groups="base.group_system"
               sequence="100"/>
 
     <menuitem id="menu_whatsapp_accounts" 

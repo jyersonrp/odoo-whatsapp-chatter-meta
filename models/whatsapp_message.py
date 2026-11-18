@@ -96,6 +96,12 @@ class WhatsAppMessage(models.Model):
         default="draft",
         index=True,
     )
+    replied = fields.Boolean(
+        string="Replied",
+        default=False,
+        index=True,
+        help="Indicates whether a subsequent inbound reply was received on this thread.",
+    )
     escalated = fields.Boolean(
         string="Escalated to Activity",
         default=False,
@@ -108,7 +114,15 @@ class WhatsAppMessage(models.Model):
     )
     error_code = fields.Char(string="Error Code", index=True, readonly=True)
     error_message = fields.Text(string="Error Detail")
-    raw_payload = fields.Text(string="Raw JSON Payload")
+    raw_payload = fields.Text(
+        string="Raw JSON Payload",
+        groups="base.group_system",
+    )
+
+    _wamid_uniq = models.Constraint(
+        "UNIQUE(wamid)",
+        "The WhatsApp Message ID (wamid) must be unique.",
+    )
 
     @api.depends("wamid", "direction")
     def _compute_name(self):
@@ -141,6 +155,7 @@ class WhatsAppMessage(models.Model):
         candidates = self.search(
             [
                 ("direction", "=", "outbound"),
+                ("replied", "=", False),
                 ("escalated", "=", False),
                 ("status", "in", ("sent", "delivered", "read")),
                 ("res_model", "in", ("sale.order", "account.move")),
@@ -175,6 +190,7 @@ class WhatsAppMessage(models.Model):
                 else ("id", "=", 0),
             ]
             if self.search_count(reply_domain) > 0:
+                msg.write({"replied": True})
                 continue
 
             record = self.env[msg.res_model].browse(msg.res_id)
@@ -278,3 +294,17 @@ class WhatsAppMessage(models.Model):
             processed |= msg
 
         return processed
+
+    @api.model
+    def _cron_cleanup_old_payloads(self, retention_days=90):
+        """Scrub raw webhook JSON payloads older than retention_days for data minimization."""
+        cutoff = fields.Datetime.now() - timedelta(days=retention_days)
+        old_msgs = self.sudo().search(
+            [
+                ("date", "<", cutoff),
+                ("raw_payload", "!=", False),
+            ],
+        )
+        if old_msgs:
+            old_msgs.write({"raw_payload": False})
+        return len(old_msgs)

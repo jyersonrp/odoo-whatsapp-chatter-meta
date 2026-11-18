@@ -27,6 +27,11 @@
                             type="object" 
                             class="oe_highlight" 
                             icon="fa-plug"/>
+                    <button name="action_sync_templates" 
+                            string="Sync Templates" 
+                            type="object" 
+                            class="btn-secondary" 
+                            icon="fa-refresh"/>
                 </header>
                 <sheet>
                     <div class="oe_title">

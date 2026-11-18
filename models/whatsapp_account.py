@@ -157,8 +157,12 @@ class WhatsAppAccount(models.Model):
             limit=1,
         )
         if not account and not raise_exception:
-            # Fallback to any active account without company or any active account
-            account = self.search([("active", "=", True)], order="id desc", limit=1)
+            # Fallback only to shared accounts with no specific company assigned
+            account = self.search(
+                [("company_id", "=", False), ("active", "=", True)],
+                order="id desc",
+                limit=1,
+            )
         if not account and raise_exception:
             raise UserError(
                 _(
@@ -167,6 +171,179 @@ class WhatsAppAccount(models.Model):
                 ),
             )
         return account
+
+    def action_sync_templates(self):
+        """
+        Synchronize official WhatsApp message templates from Meta Graph API.
+        Endpoint: GET https://graph.facebook.com/{version}/{waba_id}/message_templates
+        """
+        self.ensure_one()
+        sudo_self = self.sudo()
+        if not sudo_self.waba_id or not sudo_self.graph_api_token:
+            raise UserError(
+                _("You must configure WABA ID and Access Token to sync templates."),
+            )
+
+        url = sudo_self._get_api_url(f"{sudo_self.waba_id}/message_templates?limit=100")
+        headers = sudo_self._get_headers(is_json=True)
+
+        try:
+            response = requests.get(url, headers=headers, timeout=20)
+        except requests.RequestException as e:
+            _logger.error("Network error syncing templates from Meta: %s", e)
+            raise UserError(
+                _("Network error syncing templates from Meta: %s", str(e)),
+            )
+
+        if response.status_code != 200:
+            try:
+                err_data = response.json().get("error", {})
+                err_msg = err_data.get("message", response.text)
+                err_code = err_data.get("code", response.status_code)
+            except (ValueError, KeyError, TypeError):
+                err_msg = response.text
+                err_code = response.status_code
+            raise UserError(
+                _("Meta error syncing templates (%s): %s", err_code, err_msg),
+            )
+
+        templates_data = response.json().get("data", [])
+        template_model = self.env["whatsapp.template"]
+        model_sale = self.env.ref("sale.model_sale_order")
+        model_invoice = self.env.ref("account.model_account_move")
+
+        created_count = 0
+        updated_count = 0
+
+        for tpl_item in templates_data:
+            name = (tpl_item.get("name") or "").strip().lower()
+            language = (tpl_item.get("language") or "es").strip()
+            status = (tpl_item.get("status") or "").upper()
+            if not name:
+                continue
+
+            header_type = "none"
+            body_text = ""
+            button_commands = []
+
+            for comp in tpl_item.get("components", []):
+                comp_type = (comp.get("type") or "").upper()
+                if comp_type == "HEADER":
+                    fmt = (comp.get("format") or "").upper()
+                    if fmt == "DOCUMENT":
+                        header_type = "document"
+                    elif fmt == "TEXT":
+                        header_type = "text"
+                    elif fmt == "IMAGE":
+                        header_type = "image"
+                elif comp_type == "BODY":
+                    body_text = comp.get("text") or ""
+                elif comp_type == "BUTTONS":
+                    for seq, btn in enumerate(comp.get("buttons", []), start=1):
+                        btype = (btn.get("type") or "").upper()
+                        label = (btn.get("text") or "")[:25]
+                        if not label:
+                            continue
+                        if btype == "QUICK_REPLY":
+                            button_commands.append(
+                                (
+                                    0,
+                                    0,
+                                    {
+                                        "sequence": seq,
+                                        "button_type": "quick_reply",
+                                        "name": label,
+                                    },
+                                ),
+                            )
+                        elif btype == "PHONE_NUMBER":
+                            phone_num = btn.get("phone_number") or ""
+                            if phone_num:
+                                button_commands.append(
+                                    (
+                                        0,
+                                        0,
+                                        {
+                                            "sequence": seq,
+                                            "button_type": "phone_number",
+                                            "name": label,
+                                            "phone_number": phone_num,
+                                        },
+                                    ),
+                                )
+                        elif btype == "URL":
+                            btn_url = btn.get("url") or ""
+                            if btn_url:
+                                is_dyn = "{{" in btn_url
+                                button_commands.append(
+                                    (
+                                        0,
+                                        0,
+                                        {
+                                            "sequence": seq,
+                                            "button_type": "url",
+                                            "name": label,
+                                            "url": btn_url,
+                                            "url_type": "dynamic" if is_dyn else "static",
+                                            "url_field_path": "name" if is_dyn else False,
+                                        },
+                                    ),
+                                )
+
+            if not body_text:
+                body_text = name
+
+            existing = template_model.with_context(active_test=False).search(
+                [
+                    ("account_id", "=", self.id),
+                    ("name", "=", name),
+                    ("language", "=", language),
+                ],
+                limit=1,
+            )
+
+            if existing:
+                vals = {
+                    "header_type": header_type,
+                    "body": body_text,
+                    "active": status == "APPROVED",
+                }
+                existing.write(vals)
+                updated_count += 1
+            elif status == "APPROVED":
+                is_invoice_tpl = any(
+                    kw in name for kw in ("inv", "fact", "cobro", "payment", "pago")
+                )
+                target_model = model_invoice if is_invoice_tpl else model_sale
+                create_vals = {
+                    "name": name,
+                    "account_id": self.id,
+                    "model_id": target_model.id,
+                    "language": language,
+                    "header_type": header_type,
+                    "body": body_text,
+                    "variable_mapping": "partner_id.name, name, amount_total",
+                    "active": True,
+                }
+                if button_commands:
+                    create_vals["button_ids"] = button_commands
+                template_model.create(create_vals)
+                created_count += 1
+
+        return {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "title": _("Templates Synchronized"),
+                "message": _(
+                    "Meta template sync complete. Created: %s, Updated: %s.",
+                    created_count,
+                    updated_count,
+                ),
+                "type": "success",
+                "sticky": False,
+            },
+        }
 
     def upload_media(self, filename, file_content, mimetype="application/pdf"):
         """

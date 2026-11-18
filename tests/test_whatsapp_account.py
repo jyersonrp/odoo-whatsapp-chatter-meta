@@ -1,9 +1,11 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
+from datetime import timedelta
 from unittest.mock import MagicMock, patch
 
 import requests
 
+from odoo import fields
 from odoo.exceptions import UserError
 from odoo.tests.common import TransactionCase, tagged
 
@@ -149,3 +151,92 @@ class TestWhatsAppAccount(TransactionCase):
         )
         self.assertEqual(settings.whatsapp_phone_number_id, "100000000000001")
         self.assertEqual(settings.whatsapp_waba_id, "200000000000002")
+
+    @patch("requests.get")
+    def test_09_action_sync_templates_from_meta(self, mock_get):
+        """Verifica sincronización automática de plantillas HSM aprobadas desde Meta."""
+        mock_response = MagicMock()
+        mock_response.status_code = 200
+        mock_response.json.return_value = {
+            "data": [
+                {
+                    "name": "cotizacion_meta_sync_v1",
+                    "language": "es",
+                    "status": "APPROVED",
+                    "components": [
+                        {"type": "HEADER", "format": "DOCUMENT"},
+                        {"type": "BODY", "text": "Hola {{1}}, su pedido {{2}} suma {{3}}."},
+                        {
+                            "type": "BUTTONS",
+                            "buttons": [
+                                {"type": "QUICK_REPLY", "text": "Aprobar"},
+                                {"type": "URL", "text": "Ver Portal", "url": "https://portal.test/{{1}}"},
+                            ],
+                        },
+                    ],
+                },
+                {
+                    "name": "factura_cobro_sync_v1",
+                    "language": "es",
+                    "status": "APPROVED",
+                    "components": [
+                        {"type": "BODY", "text": "Estimado {{1}}, factura {{2}} pendiente."},
+                    ],
+                },
+                {
+                    "name": "plantilla_rechazada_v1",
+                    "language": "es",
+                    "status": "REJECTED",
+                    "components": [{"type": "BODY", "text": "No aprobada"}],
+                },
+            ],
+        }
+        mock_get.return_value = mock_response
+
+        res = self.account.action_sync_templates()
+        self.assertEqual(res["params"]["type"], "success")
+
+        tpl_so = self.env["whatsapp.template"].search(
+            [("account_id", "=", self.account.id), ("name", "=", "cotizacion_meta_sync_v1")],
+            limit=1,
+        )
+        self.assertTrue(tpl_so)
+        self.assertEqual(tpl_so.header_type, "document")
+        self.assertEqual(tpl_so.model, "sale.order")
+        self.assertEqual(len(tpl_so.button_ids), 2)
+
+        tpl_inv = self.env["whatsapp.template"].search(
+            [("account_id", "=", self.account.id), ("name", "=", "factura_cobro_sync_v1")],
+            limit=1,
+        )
+        self.assertTrue(tpl_inv)
+        self.assertEqual(tpl_inv.model, "account.move")
+
+        tpl_rej = self.env["whatsapp.template"].with_context(active_test=False).search(
+            [("account_id", "=", self.account.id), ("name", "=", "plantilla_rechazada_v1")],
+            limit=1,
+        )
+        self.assertFalse(tpl_rej)
+
+    def test_10_multi_company_isolation_and_payload_retention(self):
+        """Verifica que _get_default_account no filtre cuentas de otra compañía y que el cron limpie payloads antiguos."""
+        other_company = self.env["res.company"].create({"name": "Compañía Aislada Sin WhatsApp"})
+        isolated_acc = self.env["whatsapp.account"]._get_default_account(company=other_company)
+        self.assertFalse(isolated_acc)
+
+        old_msg = self.env["whatsapp.message"].create(
+            {
+                "wamid": "wamid.HBgL_OLD_RETENTION_TEST",
+                "account_id": self.account.id,
+                "sender": "16505550000",
+                "recipient": self.account.phone_number_id,
+                "direction": "inbound",
+                "status": "received",
+                "date": fields.Datetime.now() - timedelta(days=100),
+                "raw_payload": '{"secret": "old_pii_data"}',
+            },
+        )
+        cleaned = self.env["whatsapp.message"]._cron_cleanup_old_payloads(retention_days=90)
+        self.assertGreaterEqual(cleaned, 1)
+        old_msg.invalidate_recordset()
+        self.assertFalse(old_msg.raw_payload)

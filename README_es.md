@@ -6,7 +6,7 @@
 [![License: LGPL-3](https://img.shields.io/badge/Licencia-LGPL--3-blue.svg)](LICENSE)
 [![Python Version](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12-3776AB.svg?logo=python&logoColor=white)](https://www.python.org)
 [![Meta Graph API](https://img.shields.io/badge/Meta%20Graph%20API-v21.0-0081FB.svg?logo=meta&logoColor=white)](https://developers.facebook.com/docs/whatsapp/cloud-api)
-[![Tests](https://img.shields.io/badge/Tests-204%20passed%20(100%25)-brightgreen.svg)]()
+[![Tests](https://img.shields.io/badge/Tests-226%20passed%20(100%25)-brightgreen.svg)]()
 [![Author](https://img.shields.io/badge/Author-Yerson%20R.-orange.svg)]()
 
 Módulo empresarial para **Odoo** (Community y Enterprise) que integra la **API oficial de WhatsApp Cloud de Meta** de manera nativa y bidireccional en el **Chatter** de Presupuestos/Ventas (`sale.order`), Facturas (`account.move`) y Contactos (`res.partner`).

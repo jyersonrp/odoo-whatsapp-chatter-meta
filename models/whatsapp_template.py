@@ -4,7 +4,7 @@ import logging
 import re
 
 from odoo import _, api, fields, models
-from odoo.exceptions import ValidationError
+from odoo.exceptions import AccessError, ValidationError
 
 _logger = logging.getLogger(__name__)
 
@@ -130,15 +130,29 @@ class WhatsAppTemplate(models.Model):
             return f"{url}{val}"
         return f"{url}/{val}" if val else url
 
+    _FORBIDDEN_FIELD_NAMES = frozenset(
+        {
+            "graph_api_token",
+            "app_secret",
+            "webhook_verify_token",
+            "password",
+            "totp_secret",
+        },
+    )
+
     def _eval_field_path(self, record, path):
-        """Safely evaluate a field expression (e.g. partner_id.name)."""
+        """Safely evaluate a field expression (e.g. partner_id.name) against ORM fields only."""
         val = record
         for part in path.strip().split("."):
-            if not val:
+            if not val or not part:
+                return ""
+            if part.startswith("_") or part in self._FORBIDDEN_FIELD_NAMES:
+                return ""
+            if isinstance(val, models.BaseModel) and part not in val._fields and part != "display_name":
                 return ""
             try:
                 val = getattr(val, part, "")
-            except (AttributeError, KeyError, TypeError, ValueError):
+            except (AccessError, AttributeError, KeyError, TypeError, ValueError):
                 return ""
 
         if isinstance(val, bool):
